@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Nato';
+  src: url('../asset/fonts/NotoSans-Regular.ttf');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Nato';
+  src: url('../asset/fonts/NotoSans-Bold.ttf');
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Nato';
+  src: url('../asset/fonts/NotoSans-Light.ttf');
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Nato';
+  src: url('../asset/fonts/NotoSans-Medium.ttf');
+  font-style: normal;
+  font-weight: 500;
+}
+
+body {
+  background-color: #222222;
+  color: #dadada;
+  font-family: 'Nato';
+  font-weight: 400;
+  margin: 0 3rem 0 3rem;
+  overflow: hidden;
+}
+
+.container {
+  section {
+    height: calc(100vh + 2rem);
+  }
+}

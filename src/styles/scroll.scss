@@ -1,0 +1,17 @@
+.scroll_elements__container {
+  position: fixed;
+  top: 50%;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transform: translateY(-50%);
+
+  .scroll_item {
+    cursor: pointer;
+    padding: 0.5rem;
+    &--active {
+      font-weight: bold;
+    }
+  }
+}
