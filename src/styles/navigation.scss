@@ -1,13 +1,31 @@
 nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    font-weight: bold;
+  }
   ul {
     list-style: none;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     margin: 1.5rem 0 1.5rem 0;
     padding: 0;
 
     li {
       margin-right: 4rem;
+      cursor: pointer;
+    }
+  }
+
+  .nav_border {
+    stroke-width: 2px;
+    visibility: hidden;
+    svg {
+      g {
+        padding: 2px;
+      }
     }
   }
 }

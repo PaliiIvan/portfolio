@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
+  <style>
+    .loader {
+      background-color: #222;
+      z-index: 2;
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 20rem;
+      position: absolute;
+      top: 0;
+      left: 0;
 
-<style>
-  .loader {
-    background-color: #222;
-    z-index: 2;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    font-size: 20rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+      display: none;
+    }
 
-  .main-app {
-    z-index: 1;
-  }
-</style>
+    .main-app {
+      z-index: 1;
+    }
+  </style>
 
-
-
-<body>
-
-  <div class="loader">
-    <div class="loader_value">0</div>
-  </div>
-
-  <div class="main-app">
-    <nav>
-      <ul class="nav__items">
-        <li class="nav_item">About</li>
-        <li class="nav_item nav_item--active">Skills</li>
-        <li class="nav_item">Experience</li>
-        <li class="nav_item">Projects</li>
-      </ul>
-    </nav>
-    <legend class="scroll_elements__container">
-      <div class="scroll_item">1</div>
-      <div class="scroll_item">2</div>
-      <div class="scroll_item">3</div>
-      <div class="scroll_item">4</div>
-    </legend>
-
-    <div class="container">
-      <section id="about_section" class="section__container">
-        <div class="yggdrasil">
-          <!-- <img src="./public/images/tree.svg" alt="" srcset="" /> -->
-        </div>
-        <h1>Some Text</h1>
-        <div>Additional Text</div>
-      </section>
-
-      <section id="skills_section" class="section__container">Skills</section>
-
-      <section id="experience__section" class="section__container">Experience</section>
-
-      <section id="projects__section" class="section__container">Projects</section>
+  <body>
+    <div class="loader">
+      <div class="loader_value">0</div>
     </div>
-  </div>
 
-</body>
+    <div class="main-app">
+      <nav>
+        <div class="logo">IP</div>
+        <ul class="nav__items">
+          <svg class="nav_border" style="position: absolute">
+            <g>
+              <path class="top" d="M 5 5, H 115, V 20" fill="transparent" stroke="white" />
+              <path class="bottom" d="M 115 35, H 5, V 20" fill="transparent" stroke="white" />
+            </g>
+          </svg>
+          <li class="nav_item">About</li>
+          <li class="nav_item nav_item--active">Skills</li>
+          <li class="nav_item">Experience</li>
+          <li class="nav_item">Projects</li>
+        </ul>
+      </nav>
+      <legend class="scroll_elements__container">
+        <div class="scroll_item">1</div>
+        <div class="scroll_item">2</div>
+        <div class="scroll_item">3</div>
+        <div class="scroll_item">4</div>
+      </legend>
 
+      <div class="container">
+        <section id="about_section" class="section__container">
+          <div class="yggdrasil"></div>
+          <div class="text_content">
+            <div class="hello_text">Create magic by typing code</div>
+            <div class="description_text">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged.
+            </div>
+          </div>
+        </section>
+
+        <section id="skills_section" class="section__container">Skills</section>
+
+        <section id="experience__section" class="section__container">Experience</section>
+
+        <section id="projects__section" class="section__container">Projects</section>
+      </div>
+    </div>
+  </body>
 </html>

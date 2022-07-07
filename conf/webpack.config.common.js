@@ -22,7 +22,7 @@ const conf = {
                 { from: './src/public/', to: 'public' }
             ]
         }),
-        new HtmlLoaderPlugin({ template: './src/index.html' }),
+        new HtmlLoaderPlugin({ template: './src/index.html', inject: 'body' }),
     ],
     module: {
         rules: [
