@@ -5,3 +5,5 @@ export const projects__section = document.querySelector('#projects__section');
 
 export const navigationItems = document.querySelectorAll('.scroll_item');
 export const sections = document.querySelectorAll('.section__container');
+
+export const loader = document.querySelector('.loader_value');

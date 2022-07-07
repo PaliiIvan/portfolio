@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<style>
+  .loader {
+    background-color: #222;
+    z-index: 2;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 20rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .main-app {
+    z-index: 1;
+  }
+</style>
+
+
+
+<body>
+
+  <div class="loader">
+    <div class="loader_value">0</div>
+  </div>
+
+  <div class="main-app">
     <nav>
       <ul class="nav__items">
         <li class="nav_item">About</li>
@@ -36,5 +66,8 @@
 
       <section id="projects__section" class="section__container">Projects</section>
     </div>
-  </body>
+  </div>
+
+</body>
+
 </html>
