@@ -2,7 +2,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 4;
   .logo {
     font-weight: bold;
   }
@@ -21,7 +21,6 @@ nav {
 
   .nav_border {
     stroke-width: 2px;
-    visibility: hidden;
     svg {
       g {
         padding: 2px;

@@ -9,7 +9,7 @@
   <style>
     .loader {
       background-color: #222;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       height: 100vh;
       width: 100%;
@@ -19,8 +19,6 @@
       position: absolute;
       top: 0;
       left: 0;
-
-      display: none;
     }
 
     .main-app {
@@ -39,25 +37,26 @@
         <ul class="nav__items">
           <svg class="nav_border" style="position: absolute">
             <g>
-              <path class="top" d="M 5 5, H 115, V 20" fill="transparent" stroke="white" />
-              <path class="bottom" d="M 115 35, H 5, V 20" fill="transparent" stroke="white" />
+              <path class="top" fill="transparent" stroke="white" />
+              <path class="bottom" fill="transparent" stroke="white" />
             </g>
           </svg>
-          <li class="nav_item">About</li>
-          <li class="nav_item nav_item--active">Skills</li>
+          <li class="nav_item nav_item--active">About</li>
+          <li class="nav_item">Skills</li>
           <li class="nav_item">Experience</li>
           <li class="nav_item">Projects</li>
         </ul>
       </nav>
-      <legend class="scroll_elements__container">
-        <div class="scroll_item">1</div>
+      <!-- <legend class="scroll_elements__container">
+        <div class="scroll_item scroll_item--active">1</div>
         <div class="scroll_item">2</div>
         <div class="scroll_item">3</div>
         <div class="scroll_item">4</div>
-      </legend>
+      </legend> -->
 
       <div class="container">
-        <section id="about_section" class="section__container">
+        <div class="transition"></div>
+        <section id="about_section" class="section__container active">
           <div class="yggdrasil"></div>
           <div class="text_content">
             <div class="hello_text">Create magic by typing code</div>

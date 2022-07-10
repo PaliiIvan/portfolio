@@ -10,7 +10,7 @@ const resourcesList = [
 /**
  * 
  * @param {onEachLoad} onEachLoad
- * @returns 
+ * @returns {{[string]: any}}
  */
 export async function loadResources(onEachLoad) {
     let allResObj = {};
