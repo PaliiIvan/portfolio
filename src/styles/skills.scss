@@ -26,6 +26,13 @@
     stroke-width: 0.15rem;
     stroke: #dadada;
 
+    text {
+      text-anchor: middle;
+      dominant-baseline: middle;
+      fill: #dadada;
+      stroke: none;
+    }
+
     &.active {
       background-color: #dadada;
       color: #434343;
@@ -39,24 +46,19 @@
 
   .skill_lvl_1 {
     @include skill;
-    // width: 20rem;
-    // height: 20rem;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
+    
   }
 
   .skill_lvl_2 {
     @include skill;
-    // width: 9.75rem;
-    // height: 9.75rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
   }
 
   .skill_lvl_3 {
     @include skill;
-    // width: 4.625rem;
-    // height: 4.625rem;
     font-size: 0.8rem;
     font-weight: bold;
   }
