@@ -10,6 +10,7 @@ import { loadResources } from "./scripts/resource.loader";
 import { loader } from "./scripts/selection";
 
 import { About } from "./scripts/sections/about";
+import { Skills } from "./scripts/sections/skills";
 
 
 loadResources(() => { }).then((resources) => {
@@ -21,7 +22,7 @@ loadResources(() => { }).then((resources) => {
         duration: 2,
         onComplete: () => {
             NavigationComponent.init(resources);
-            About.init(resources);
+            Skills.init(resources);
         }
 
     });

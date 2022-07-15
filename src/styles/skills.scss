@@ -1,0 +1,63 @@
+#skills_section {
+  .header {
+    font-size: 5rem;
+  }
+  .border__container {
+    border-top: 0.2rem #dadada solid;
+    border-left: 0.2rem #dadada solid;
+    height: calc(100vh - 14rem);
+    position: relative;
+  }
+
+  .main__draw__container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  @mixin skill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #434343;
+    stroke-width: 0.15rem;
+    stroke: #dadada;
+
+    &.active {
+      background-color: #dadada;
+      color: #434343;
+    }
+
+    &:hover {
+      background-color: #dadada;
+      color: #434343;
+    }
+  }
+
+  .skill_lvl_1 {
+    @include skill;
+    // width: 20rem;
+    // height: 20rem;
+    font-size: 4rem;
+    font-weight: bold;
+  }
+
+  .skill_lvl_2 {
+    @include skill;
+    // width: 9.75rem;
+    // height: 9.75rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .skill_lvl_3 {
+    @include skill;
+    // width: 4.625rem;
+    // height: 4.625rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
