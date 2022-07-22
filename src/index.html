@@ -1,78 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
 
-  <style>
-    .loader {
-      background-color: #222;
-      z-index: 3;
-      display: flex;
-      height: 100vh;
-      width: 100%;
-      align-items: center;
-      justify-content: center;
-      font-size: 20rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-    .main-app {
-      z-index: 1;
-    }
-  </style>
+<style>
+  .loader {
+    background-color: #222;
+    z-index: 3;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 20rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
-  <body>
-    <div class="loader">
-      <div class="loader_value">0</div>
-    </div>
+  .main-app {
+    z-index: 1;
+  }
+</style>
 
-    <div class="main-app">
-      <nav>
-        <div class="logo">IP</div>
-        <ul class="nav__items">
-          <svg class="nav_border" style="position: absolute">
-            <g>
-              <path class="top" fill="transparent" stroke="white" />
-              <path class="bottom" fill="transparent" stroke="white" />
-            </g>
-          </svg>
-          <li class="nav_item nav_item--active">About</li>
-          <li class="nav_item">Skills</li>
-          <li class="nav_item">Experience</li>
-          <li class="nav_item">Projects</li>
-        </ul>
-      </nav>
-      <!-- <legend class="scroll_elements__container">
-        <div class="scroll_item scroll_item--active">1</div>
-        <div class="scroll_item">2</div>
-        <div class="scroll_item">3</div>
-        <div class="scroll_item">4</div>
-      </legend> -->
+<body>
+  <div class="loader">
+    <div class="loader_value">0</div>
+  </div>
 
-      <div class="container">
-        <div class="transition"></div>
-        <section id="about_section" class="section__container">
-          <div class="yggdrasil"></div>
-          <div class="text_content">
-            <div class="hello_text">Create magic by typing code</div>
-            <div class="description_text">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
-            </div>
+  <div class="main-app">
+    <nav>
+      <div class="logo">IP</div>
+      <ul class="nav__items">
+        <svg class="nav_border" style="position: absolute">
+          <g>
+            <path class="top" fill="transparent" stroke="white" />
+            <path class="bottom" fill="transparent" stroke="white" />
+          </g>
+        </svg>
+        <li class="nav_item nav_item--active">About</li>
+        <li class="nav_item">Skills</li>
+        <li class="nav_item">Experience</li>
+        <li class="nav_item">Projects</li>
+      </ul>
+    </nav>
+
+    <div class="container">
+
+      <div class="transition"></div>
+
+      <section id="about_section" class="section__container ">
+        <div class="yggdrasil"></div>
+        <div class="text_content">
+          <div class="hello_text">Create magic by typing code</div>
+          <div class="description_text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged.
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="skills_section" class="section__container active">
-          <div class="header">Skills</div>
-          <div class="border__container skills__section__content">
-            <!-- <div class="skill_lvl_1">React.js</div>
+      <section id="skills_section" class="section__container">
+        <div class="header">Skills</div>
+        <div class="border__container skills__section__content">
+          <!-- <div class="skill_lvl_1">React.js</div>
             <div style="display: flex">
               <div class="skill_lvl_2">Redux</div>
               <div class="skill_lvl_2">Redux</div>
@@ -80,14 +77,617 @@
             <div style="display: flex">
               <div class="skill_lvl_3">Angular</div>
               <div class="skill_lvl_3">Angular</div> -->
+        </div>
+      </section>
+
+      <section id="experience__section" class="section__container active">
+        <div class="header">Experience</div>
+        <div class="border__container">
+          <div class="exp_container">
+            <div class="pentalog company_timelines">
+              <div class="">
+                pe
+              </div>
+            </div>
+
+            <div class="amdaris company_timelines">
+              am
             </div>
           </div>
-        </section>
 
-        <section id="experience__section" class="section__container">Experience</section>
+        </div>
+      </section>
 
-        <section id="projects__section" class="section__container">Projects</section>
+      <section id="projects__section" class="section__container">Projects</section>
+
+    </div>
+
+
+
+  </div>
+  </div>
+</body>
+
+<template class="skills-template ">
+  <div id="React.js" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>Declarative</p>
+        <div>
+          React makes it painless to create interactive UIs.
+          Design simple views for each state in your application,
+          and React will efficiently update and render just the right
+          components when your data changes.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Component-Based</p>
+        <div>
+          Build encapsulated components that manage their own state,
+          then compose them to make complex UIs.
+          It saves time for developers as they don’t have to write various codes
+          for the same features. Furthermore, if any changes are made in any particular part,
+          it will not affect other parts of the application.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>It’s easy to learn</p>
+        <div>
+          React, compared to other popular frontend frameworks like Angular & Vue, is much easier to learn.
+          In fact, it’s one of the main reasons why React gained so much traction in little time.
+          It helps businesses quickly build their projects.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+  <div id="Redux" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      Redux is simply a store to store the state of the variables in your app.
+      Redux creates a process and procedures to interact with the store so that
+      components will not just update or read the store randomly.
+      Redux is a predictable state container for JavaScript apps.
+
+      It helps you write applications that behave consistently,
+      run in different environments (client, server, and native),
+      and are easy to test. On top of that, it provides a great developer experience,
+      such as live code editing combined with a time traveling debugger.
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>Predictable</p>
+        <div>
+          Redux helps you write applications that behave consistently,
+          run in different environments (client, server, and native),
+          and are easy to test.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Centralized</p>
+        <div>
+          Centralizing your application's state and logic enables powerful
+          capabilities like undo/redo, state
+          persistence, and much more.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Debuggable</p>
+        <div>
+          The Redux DevTools make it easy to trace when, where, why,
+          and how your application's state changed. Redux's
+          architecture lets you log changes, use "time-travel debugging",
+          and even send complete error reports to a
+          server.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+  <div id="SCSS" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      Sass is a preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets (CSS).
+      The newer syntax, "SCSS", uses block formatting like that of CSS.
+      CSS3 consists of a series of selectors and pseudo-selectors that group rules that apply to them.
+      Sass extends CSS by providing several mechanisms available in more traditional programming languages,
+      particularly object-oriented languages, but that are not available to CSS3 itself. When SassScript is interpreted,
+      it creates blocks of CSS rules for various selectors as defined by the Sass file. The Sass interpreter
+      translates SassScript into CSS. Alternatively, Sass can monitor the .scss file and translate it to an output .css
+      file whenever the .sass or .scss file is saved.
+
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>CSS Compatible</p>
+        <div>
+          Sass is completely compatible with all versions of CSS. We take this compatibility seriously, so that you can
+          seamlessly use any available CSS libraries.
+          Over and over again, the industry is choosing Sass as the premier CSS extension language.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Feature Rich</p>
+        <div>
+          Sass boasts more features and abilities than any other CSS extension language out there. The Sass Core Team
+          has worked endlessly to not only keep up, but stay ahead.
+          Sass has been actively supported for over 15 years by its loving Core Team.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Large Community</p>
+        <div>
+          Sass is actively supported and developed by a consortium of several tech companies and hundreds of developers.
+          There are an endless number of frameworks built with Sass. Compass, Bourbon, and Susy just to name a few.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+  <div id="CSS" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      Cascading Style Sheets, fondly referred to as CSS, is a simple design language intended to simplify the process of
+      making web pages presentable.
+
+      CSS handles the look and feel part of a web page. Using CSS, you can control the color of the text, the style of
+      fonts, the spacing between paragraphs, how columns are sized and laid out, what background images or colors are
+      used, layout designs,variations in display for different devices and screen sizes as well as a variety of other
+      effects.
+
+      CSS is easy to learn and understand but it provides powerful control over the presentation of an HTML document.
+      Most commonly, CSS is combined with the markup languages HTML or XHTML.
+
+      <div class="description-sub-items">
+
+        <div class="sub-item">
+          <p>Easy maintenance</p>
+          <div>
+            To make a global change, simply change the style, and all elements in all the web pages will be updated
+            automatically.
+            Now HTML attributes are being deprecated and it is being recommended to use CSS. So its a good idea to start
+            using CSS in all the HTML pages to make them compatible to future browsers.
+          </div>
+        </div>
+
+        <div class="sub-item">
+          <p>Superior styles to HTML</p>
+          <div>
+            CSS has a much wider array of attributes than HTML, so you can give a far better look to your HTML page in
+            comparison to HTML attributes.
+            Style sheets allow content to be optimized for more than one type of device. By using the same HTML
+            document, different versions of a website can be presented for handheld devices such as PDAs and cell phones
+            or for printing.
+          </div>
+        </div>
+
+        <div class="sub-item">
+          <p>Multiple Device Compatibility</p>
+          <div>
+            Style sheets allow content to be optimized for more than one type of device. By using the same HTML
+            document, different versions of a website can be presented for handheld devices such as PDAs and cell phones
+            or for printing.
+          </div>
+        </div>
+
       </div>
     </div>
-  </body>
+  </div>
+
+  <div id="Node.js" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and
+      executes JavaScript code outside a web browser, which was designed to build scalable network applications. Node.js
+      lets developers use JavaScript to write command line tools and for server-side scripting—running scripts
+      server-side to produce dynamic web page content before the page is sent to the user's web browser. Consequently,
+      Node.js represents a "JavaScript everywhere" paradigm, unifying web-application development around a single
+      programming language, rather than different languages for server-side and client-side scripts.
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>Fast</p>
+      </div>
+
+      <div class="sub-item">
+        <p>Cross-Platform</p>
+      </div>
+
+      <div class="sub-item">
+        <p>Open-Source</p>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+  <div id="Angular" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      Angular is a platform and framework for building single-page client applications using HTML and TypeScript.
+      Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries
+      that you import into your applications.
+      <br />
+
+      As a platform, Angular includes:
+      <ul>
+        <li>
+          A component-based framework for building scalable web applications
+        </li>
+        <li>
+          A collection of well-integrated libraries that cover a wide variety of features, including routing, <br />
+          forms management, client-server communication, and more
+        </li>
+        <li>
+          A suite of developer tools to help you develop, build, test, and update your code
+        </li>
+      </ul>
+
+
+
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>DEVELOP ACROSS ALL PLATFORMS</p>
+        <div>
+          Learn one way to build applications with Angular and reuse your code and abilities to build apps for any
+          deployment target. For web, mobile web, native mobile and native desktop.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>SPEED & PERFORMANCE</p>
+        <div>
+          Achieve the maximum speed possible on the Web Platform today, and take it further, via Web Workers and
+          server-side rendering.
+
+          Angular puts you in control over scalability. Meet huge data requirements by building data models on RxJS,
+          Immutable.js or another push-model.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>INCREDIBLE TOOLING</p>
+        <div>
+          Build features quickly with simple, declarative templates. Extend the template language with your own
+          components and use a wide array of existing components. Get immediate Angular-specific help and feedback with
+          nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather than
+          trying to make the code work.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="HTML" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      HTML, or HyperText Markup Language, allows web users to create and structure sections, paragraphs, and links using
+      elements, tags, and attributes. However, it’s worth noting that HTML is not considered a programming language as
+      it can’t create dynamic functionality. <br />
+      HTML has a lot of use cases, namely:
+
+      <div class="description-sub-items">
+
+        <div class="sub-item">
+          <p>Web development.</p>
+          <div>
+            Developers use HTML code to design how a browser displays web page elements, such as text,
+            hyperlinks, and media files.
+          </div>
+        </div>
+
+        <div class="sub-item">
+          <p> Internet navigation.</p>
+          <div>
+            Users can easily navigate and insert links between related pages and websites as HTML
+            is heavily used to embed hyperlinks.
+          </div>
+        </div>
+
+        <div class="sub-item">
+          <p> Web documentation.</p>
+          <div>
+            HTML makes it possible to organize and format documents, similarly to Microsoft Word.
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+    </div>
+  </div>
+
+  <div id="TS" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      TypeScript is JavaScript with syntax for types.
+      TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any
+      scale.
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>JavaScript and More</p>
+        <div>
+          TypeScript adds additional syntax to JavaScript to support a tighter integration with your editor. Catch
+          errors early in your editor.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>A Result You Can Trust</p>
+        <div>
+          TypeScript code converts to JavaScript, which runs anywhere JavaScript runs: In a browser, on Node.js or Deno
+          and in your apps.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Safety at Scale</p>
+        <div>
+          TypeScript understands JavaScript and uses type inference to give you great tooling without additional code.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="D3.js" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using
+      HTML, SVG, and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without
+      tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach
+      to DOM manipulation.
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>Data Driven:</p>
+        <div>
+          D3 is data driven. It can use static data or fetch it from the remote server in different formats such as
+          Arrays, Objects, CSV, JSON, XML etc. to create different types of charts.
+          D3 allows you to manipulate the Document Object Model (DOM) based on your data.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Dynamic Properties:</p>
+        <div>
+          D3 gives the flexibility to provide dynamic properties to most of its functions. Properties can be specified
+          as functions of data. That means your data can drive your styles and attributes.
+          With D3, there are no standard visualization formats. But it enables you to create anything from an HTML table
+          to a Pie chart, from graphs and bar charts to geospatial maps.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Interaction and animation</p>
+        <div>
+          D3 provides great support for animation with functions like duration(), delay() and ease(). Animations from
+          one state to another are fast and responsive to user interactions.
+          D3 provides the transition() function. This is quite powerful because internally, D3 works out the logic to
+          interpolate between your values and find the intermittent states.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+  <div id="JS" class="skill">
+    <div class="paragraph">
+      About Technology:
+    </div>
+
+    <div class="paragraph-description">
+      JavaScript is one of the most popular programming languages ​​in the world.
+      It is used to create interactive web pages, mobile applications, in server development.
+      JavaScript is a high-level, often just-in-time compiled language that conforms to the ECMAScript standard.
+      It has dynamic typing, prototype-based object-orientation, and first-class functions.
+      It is multi-paradigm, supporting event-driven, functional, and imperative programming styles.
+      It has application programming interfaces (APIs) for working with text, dates, regular expressions,
+      standard data structures, and the Document Object Model (DOM).
+    </div>
+
+    <div class="description-sub-items">
+
+      <div class="sub-item">
+        <p>High-level</p>
+        <div>
+          JavaScript is a dynamic scripting language supporting prototype based object construction.
+          The basic syntax is intentionally similar to both Java and C++ to reduce the number of new
+          concepts required to learn the language.JavaScript can function as both a procedural and an object oriented
+          language.
+          Objects are created programmatically in JavaScript, by attaching methods and properties
+          to otherwise empty objects at run time, as opposed to the syntactic class definitions common
+          in compiled languages like C++ and Java.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Client Side</p>
+        <div>
+          Client-side JavaScript is the most common form of the language.
+          The script should be included in or referenced by an HTML document for the code to be interpreted by the
+          browser.
+          The JavaScript client-side mechanism provides many advantages over traditional CGI server-side scripts.
+          For example, you might use JavaScript to check if the user has entered a valid e-mail address in a form
+          field.
+          The JavaScript code is executed when the user submits the form, and only if all the entries are valid,
+          they would be submitted to the Web Server.
+          JavaScript can be used to trap user-initiated events such as button clicks, link navigation,
+          and other actions that the user initiates explicitly or implicitly.
+        </div>
+      </div>
+
+      <div class="sub-item">
+        <p>Server Side</p>
+        <div>
+          Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8
+          engine and executes JavaScript code outside a web browser, which was designed to build scalable network
+          applications. Node.js lets developers use JavaScript to write command line tools and for server-side
+          scripting—running scripts server-side to produce dynamic web page content before the page is sent to the
+          user's web browser.
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="paragraph">
+      My experience:
+    </div>
+
+    <div class="paragraph-description">
+      ReactJS is a free and open-source front-end JavaScript
+      library for building user interfaces based on UI components.
+      It is maintained by Meta (formerly Facebook) and a community of
+      individual developers and companies.
+      React can be used as a base in the development of single-page,
+      mobile, or server-rendered applications with frameworks like Next.js.
+    </div> -->
+  </div>
+
+</template>
+
 </html>

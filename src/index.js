@@ -11,6 +11,7 @@ import { loader } from "./scripts/selection";
 
 import { About } from "./scripts/sections/about";
 import { Skills } from "./scripts/sections/skills";
+import { Experience } from "./scripts/sections/experience";
 
 
 loadResources(() => { }).then((resources) => {
@@ -22,7 +23,13 @@ loadResources(() => { }).then((resources) => {
         duration: 2,
         onComplete: () => {
             NavigationComponent.init(resources);
-            Skills.init(resources);
+            Experience.init(resources);
+
+            // setTimeout(() => {
+            //     console.log('click');
+            //     //console.log(document.querySelector('.skill_lvl_1 rect'));
+            //     document.querySelector('.skill_lvl_1').dispatchEvent(new Event('click'));;
+            // }, 1000)
         }
 
     });

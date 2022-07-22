@@ -1,0 +1,119 @@
+#skills_section {
+  .main__draw__container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  @mixin skill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #434343;
+    stroke-width: 0.15rem;
+    stroke: #dadada;
+
+    cursor: pointer;
+    rect {
+      transition: 1s fill;
+    }
+    text {
+      transition: 1s fill;
+    }
+
+    text {
+      text-anchor: middle;
+      dominant-baseline: middle;
+      fill: #dadada;
+      stroke: none;
+    }
+
+    &.active {
+      rect {
+        fill: #dadada;
+        transition: 1s fill;
+      }
+      text {
+        fill: #434343;
+        transition: 1s fill;
+      }
+    }
+
+    &.hover {
+      rect {
+        fill: #dadada;
+        transition: 1s fill;
+      }
+      text {
+        fill: #434343;
+        transition: 1s fill;
+      }
+    }
+  }
+
+  .skill_lvl_1 {
+    @include skill;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .skill_lvl_2 {
+    @include skill;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .skill_lvl_3 {
+    @include skill;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .cross-line {
+    transform-box: fill-box;
+    transform-origin: center;
+    stroke: #434343;
+  }
+
+  .cross-icon {
+    position: relative;
+  }
+
+  .skill-description {
+    fill: #dadada;
+    stroke-width: 0.15rem;
+    stroke: white;
+  }
+
+  .skill {
+    color: #434343;
+    padding: 1rem 2rem 1rem 2rem;
+
+    .paragraph {
+      font-size: 3rem;
+    }
+    .paragraph:not(:first-child) {
+      margin-top: 1rem;
+    }
+
+    .paragraph-description {
+      margin-top: 1rem;
+    }
+    .description-sub-items {
+      display: flex;
+      margin-top: 2rem;
+      gap: 1rem;
+      .sub-item {
+        flex: 1;
+
+        p {
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}

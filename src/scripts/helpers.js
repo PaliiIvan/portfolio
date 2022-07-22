@@ -1,4 +1,6 @@
 import * as D3 from "d3";
+import { PAGES, PAGESStr } from "./constants";
+import { about_section, experience__section, projects__section, sections, skills_section } from "./selection";
 
 export function iteratePage(index, goOnTop) {
 
@@ -71,7 +73,7 @@ export function rectCollide() {
             }
 
             return x0 > xi + xSize || y0 > yi + ySize ||
-                   x1 < xi - xSize || y1 < yi - ySize
+                x1 < xi - xSize || y1 < yi - ySize
         }
 
         function prepare(quad) {
@@ -100,8 +102,8 @@ export function rectCollide() {
 
     force.size = function (_) {
         return (arguments.length
-             ? (size = typeof _ === 'function' ? _ : constant(_), force)
-             : size)
+            ? (size = typeof _ === 'function' ? _ : constant(_), force)
+            : size)
     }
 
     force.strength = function (_) {
@@ -112,8 +114,8 @@ export function rectCollide() {
         return (arguments.length ? (iterations = +_, force) : iterations)
     }
 
-    force.pending = function(_) {
-        return (arguments.length? (pending = +_, force) : pending)
+    force.pending = function (_) {
+        return (arguments.length ? (pending = +_, force) : pending)
     }
 
     return force
@@ -130,16 +132,16 @@ let oldVal = 0;
  */
 export function calculateMiddleValue(val, maxVal) {
 
-    if(isNaN(val)) {
+    if (isNaN(val)) {
         return oldVal;
     }
 
     oldVal = val;
-    if(val < 0 ) {
+    if (val < 0) {
         return 0;
     }
 
-    if(val > maxVal) {
+    if (val > maxVal) {
         return maxVal;
     }
 
@@ -147,4 +149,83 @@ export function calculateMiddleValue(val, maxVal) {
 }
 
 
+export function initiateDrugEvents(simulation) {
 
+    function dragstarted(event) {
+        if (!event.active) {
+            simulation.alphaTarget(0.3).restart()
+        };
+
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+    }
+
+    function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+    }
+
+    function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+        simulation.restart();
+    }
+
+    initiateDrugEvents.nullDrag = D3.drag()
+        .on("start", null)
+        .on("drag", null)
+        .on("end", null);
+
+    initiateDrugEvents.activeDrag = D3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+
+    return D3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+}
+
+
+function pageInitializer() {
+    let pages = new Map();
+
+
+    /**
+     * @param {{onInitPage: () => void, onReInitPage: () => void, page: string}}
+     */
+    return ({ onInitPage, onReInitPage, page }) => {
+        if (pages.has(page)) {
+            return onReInitPage();
+        }
+
+        pages.set(page, 'null');
+
+        return onInitPage();
+    }
+}
+
+
+export const PageHandel = pageInitializer();
+
+
+export function Sections(name) {
+    switch (name) {
+        case PAGES.ABOUT:
+            return about_section
+        case PAGES.EXPERIENCE:
+            return experience__section
+        case PAGES.SKILLS:
+            return skills_section
+        case PAGES.PROJECTS:
+            return projects__section
+    }
+}
+
+export function showPage(page) {
+    const section = Sections(page);
+    sections.forEach((x) => x.classList.remove("active"));
+    section.classList.add("active");
+}

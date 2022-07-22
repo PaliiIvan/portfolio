@@ -1,9 +1,9 @@
-import { sections } from "../selection";
+import { PAGES } from "../constants";
+import { showPage } from "../helpers";
+
 
 function init(resources) {
-    const section = document.querySelector('#projects__section');
-    sections.forEach(x => x.classList.remove('active'));
-    section.classList.add('active');
+    showPage(PAGES.PROJECTS)
 }
 
 

@@ -1,9 +1,9 @@
+import { PAGES } from "../constants";
+import { showPage } from "../helpers";
 import { sections } from "../selection";
-
+import "./experience.scss";
 export function init(resources) {
-    const section = document.querySelector('#experience__section');
-    sections.forEach(x => x.classList.remove('active'));
-    section.classList.add('active');
+    showPage(PAGES.EXPERIENCE);
 }
 
 

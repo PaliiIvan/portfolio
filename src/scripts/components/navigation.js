@@ -1,7 +1,7 @@
 import { gsap, Power1 } from "gsap";
 
-import { PAGES, SCROLL_DIRECTION } from "../constants";
-import { iteratePage } from "../helpers";
+import { PageInitHandlers, PAGES, PAGESStr, SCROLL_DIRECTION } from "../constants";
+import { iteratePage, PageHandel, showPage } from "../helpers";
 import { navItems, svg_container, topBorder, bottomBorder } from "../selection";
 
 import { Projects } from "../sections/projects";
@@ -24,7 +24,7 @@ function init(resources) {
     let currentSectionIndex = 0
     let prevSectionIndex = currentSectionIndex;
     let shouldScroll = true;
-    let currentActiveItem = navItems[PAGES.ABOUT];
+    let currentActiveItem = navItems[PAGES.EXPERIENCE];
 
     changeActiveElement(currentActiveItem, svg_container);
 
@@ -155,23 +155,44 @@ function init(resources) {
     function changeSection(index, resources) {
         switch (index) {
             case PAGES.ABOUT: {
-                showPageTransition(() => About.init(resources));
+
+                PageHandel({
+                    onInitPage: () => showPageTransition(() => About.init(resources)),
+                    onReInitPage: () => showPageTransition(() => showPage(PAGES.ABOUT)),
+                    page: PAGES.ABOUT
+                })
                 break;
             };
             case PAGES.SKILLS: {
-                showPageTransition(() => Skills.init(resources));
+                PageHandel({
+                    onInitPage: () => showPageTransition(() => Skills.init(resources)),
+                    onReInitPage: () => showPageTransition(() => showPage(PAGES.SKILLS)),
+                    page: PAGES.SKILLS
+                })
                 break;
             };
             case PAGES.EXPERIENCE: {
-                showPageTransition(() => Experience.init(resources));
+                PageHandel({
+                    onInitPage: () => showPageTransition(() => Experience.init(resources)),
+                    onReInitPage: () => showPageTransition(() => showPage(PAGES.EXPERIENCE)),
+                    page: PAGES.EXPERIENCE
+                })
                 break;
             };
             case PAGES.PROJECTS: {
-                showPageTransition(() => Projects.init(resources));
+                PageHandel({
+                    onInitPage: () => showPageTransition(() => Projects.init(resources)),
+                    onReInitPage: () => showPageTransition(() => showPage(PAGES.PROJECTS)),
+                    page: PAGES.PROJECTS
+                })
                 break;
             };
             default: {
-                showPageTransition(() => About.init(resources));
+                PageHandel({
+                    onInitPage: () => showPageTransition(() => About.init(resources)),
+                    onReInitPage: () => showPageTransition(() => showPage(PAGES.ABOUT)),
+                    page: PAGES.ABOUT
+                })
                 break;
             }
         }

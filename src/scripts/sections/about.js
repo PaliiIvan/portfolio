@@ -4,12 +4,12 @@ import { Resources } from "../resource.loader";
 import { sections } from "../selection";
 
 import "../../styles/about.scss";
+import { showPage } from "../helpers";
+import { PAGES } from "../constants";
 
 
 function init(resources) {
-    const section = document.querySelector('#about_section');
-    sections.forEach(x => x.classList.remove('active'));
-    section.classList.add('active');
+    showPage(PAGES.ABOUT)
     const treeIcon = resources[Resources.yggdrasil];
 
     addIcon(treeIcon);
