@@ -20,9 +20,87 @@ export const PAGESStr = {
 }
 
 
-// export const PageInitHandlers = {
-//     about: pageInitializer(),
-//     skills: pageInitializer(),
-//     experience: pageInitializer(),
-//     projects: pageInitializer()
-// };
+export const EXPERIENCE = [
+    {
+        company: 'Amdaris',
+        positions: [
+            {
+                name: 'Full-Stack Developer',
+                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                 fullDescription: {
+                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
+                 },
+                 
+            }
+        ]
+    },
+    {
+        company: 'Pentalog',
+        positions: [
+            {
+                name: 'Front-End Developer',
+                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                 fullDescription: {
+                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
+                 },
+                 
+            },
+            {
+                name: 'Full-Stack Developer',
+                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                 fullDescription: {
+                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
+                 },
+                 
+            },
+            {
+                name: 'C# Developer',
+                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                 fullDescription: {
+                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
+                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
+                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
+                 },
+                 
+            }
+        ]
+    }
+]

@@ -229,3 +229,21 @@ export function showPage(page) {
     sections.forEach((x) => x.classList.remove("active"));
     section.classList.add("active");
 }
+
+
+
+
+export function rPosition(value, attr) {
+
+    return function() {
+        /**
+         * @type {HTMLBaseElement} currentElem
+         */
+        const currentElem = this;
+
+        const rect = currentElem.getBoundingClientRect();
+        console.log(rect);
+        return (rect[attr] + value);
+    }
+   
+}
