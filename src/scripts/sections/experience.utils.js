@@ -9,7 +9,6 @@ import { createSvg } from "../helpers";
  */
 export function animateBlockHover(currentRect, svgContainer, circle, circleYPos, id) {
 
-    const borderTm = gsap.timeline({ id });
 
     circle.attr('cy', circleYPos);
 
@@ -24,7 +23,8 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
 
     const borderGroup = svgContainer
         .append('g')
-        .attr('class', 'border-container');
+        .attr('class', 'border-container')
+        .attr('id', `_${id}`);
 
 
     const secondCircle = borderGroup
@@ -66,6 +66,10 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
     const borderBottomNode = borderBottom.node();
     const borderRightNode = borderRight.node();
 
+    const borderTm = gsap.timeline({ id, onReverseComplete: () => {
+        borderGroup.remove();
+        console.log('border removed', id);
+    } });
 
     borderTm
         .to(circle.node(), {
@@ -102,17 +106,20 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
     return ({ borderTm, borderGroup });
 }
 
-/**
- * 
- * @param {{borderTm: gsap.core.Timeline}}  borderTm
-**/
-export function resetBorder({ borderTm, borderGroup }) {
-    borderTm.vars.onReverseComplete = () => {
-        borderGroup.node().remove();
-    };
+// /**
+//  * 
+//  * @param {{borderTm: gsap.core.Timeline}}  borderTm
+// **/
+// export function resetBorder({ borderTm, borderGroup }, id) {
+//     borderTm.vars.onReverseComplete = () => {
+//         id = id.split(' ').join('.');
+//         console.log(id);
+//         let res = document.querySelector(`.${id}`);
+//         res.remove();
+//     };
 
-    borderTm.reverse();
-}
+//     borderTm.reverse();
+// }
 
 /**
  * 
@@ -175,7 +182,6 @@ export function showInformationContainer(activeGroup, onAnimationComplete) {
                 left: 'inherit',
                 right: '0%',
                 top: '5%',
-                opacity: 0,
                 width: style.width,
             },
             {
@@ -228,9 +234,10 @@ export function displayPositionInformation(data, companyName) {
     const template = document.querySelector('.experience-template').content;
     const companyDescription = template.querySelector(`.company-description .${companyName}`)
     const contentContainer = document.getElementById('position-content-container');
+    const companyDescriptionClone = companyDescription.cloneNode(true);
 
-
-    contentContainer.append(companyDescription.cloneNode(true));
+    companyDescriptionClone.style.padding = ('1rem 2rem 1rem 2rem')
+    contentContainer.append(companyDescriptionClone);
 }
 
 
@@ -245,6 +252,7 @@ export function showCloseIcon(activeGroup, onClick) {
         .attr('class', 'cross-group')
         .elem;
 
+    const crossTimeLine = gsap.timeline({onReverseComplete: () => crossXGroup.remove()});
 
     const crossStartPosition = 7.5;
     const lineLeft = createSvg('line')
@@ -274,7 +282,7 @@ export function showCloseIcon(activeGroup, onClick) {
     crossXGroup.appendChild(pointerRect);
     activeGroup.appendChild(crossXGroup)
 
-    let leftAnim = gsap.to(lineLeft, {
+    let leftAnim = crossTimeLine.to(lineLeft, {
         duration: 1,
         attr: {
             'x1': 0,
@@ -284,23 +292,21 @@ export function showCloseIcon(activeGroup, onClick) {
         }
     });
 
-    let rightAnim = gsap.to(lineRight, {
+    let rightAnim = crossTimeLine.to(lineRight, {
         duration: 1,
-        onReverseComplete: crossXGroup.remove,
         attr: {
             'x1': 0,
             'x2': 15,
             'y1': 0,
             'y2': 15
         }
-    })
+    }, '<');
 
     pointerRect.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
         onClick(event);
-        leftAnim.reverse();
-        rightAnim.reverse();
+        crossTimeLine.reverse();
 
 
     });

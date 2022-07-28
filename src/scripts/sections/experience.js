@@ -140,12 +140,13 @@ function drawSvg(data) {
     });
 
 
-    let hoverAnimationResult;
+
     subItemsG.each(function (positionData, index, arr) {
+        let hoverAnimationResult;
         const id = this.getAttribute('id');
         const divContainer = this.querySelector('div');
         const nameNode = this.querySelector('text');
-
+        const random = Math.random() * 100;
         const { x, y, height } = this.getBBox();
         const circleOldPos = subCirclesPositions[positionData.pos];
         const circle = subCircles.filter((f, i) => i === positionData.pos);
@@ -168,6 +169,7 @@ function drawSvg(data) {
             event.stopPropagation();
             event.stopImmediatePropagation();
             if (!shouldStopReverseAnimation) {
+                console.log(id);
                 hoverAnimationResult = animateBlockHover(rect, svgContainer, circle, circleOldPos, id);
             }
         })
@@ -175,13 +177,16 @@ function drawSvg(data) {
         this.addEventListener('mouseout', (event) => {
             event.stopPropagation();
             event.stopImmediatePropagation();
+            
             if (!shouldStopReverseAnimation) {
-                resetBorder(hoverAnimationResult);
+               
+              hoverAnimationResult.borderTm.reverse();
             }
 
         });
 
-        this.addEventListener('click', (event) => {
+        this.addEventListener('click', function(event) {
+            console.log(random);
             event.stopPropagation();
             event.stopImmediatePropagation();
             shouldStopReverseAnimation = true;
@@ -193,9 +198,10 @@ function drawSvg(data) {
                     contentRectTimeline: positionInformationTm,
                     rectangleTimeLine: rectangleActiveTml,
                     onComplete: () => {
-                        resetBorder(hoverAnimationResult);
+                        console.log(id);
+                        hoverAnimationResult.borderTm.reverse();
+                        console.log(hoverAnimationResult.borderTm);
                         shouldStopReverseAnimation = false;
-
                     }
                 })
             }
