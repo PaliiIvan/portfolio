@@ -26,10 +26,11 @@ export const EXPERIENCE = [
         positions: [
             {
                 name: 'Full-Stack Developer',
+                pos: 0,
                 shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                 fullDescription: {
+                fullDescription: {
                     projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
@@ -39,8 +40,8 @@ export const EXPERIENCE = [
                     roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                 },
-                 
+                },
+
             }
         ]
     },
@@ -49,10 +50,11 @@ export const EXPERIENCE = [
         positions: [
             {
                 name: 'Front-End Developer',
+                pos: 0,
                 shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                 fullDescription: {
+                fullDescription: {
                     projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
@@ -62,15 +64,16 @@ export const EXPERIENCE = [
                     roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                 },
-                 
+                },
+
             },
             {
                 name: 'Full-Stack Developer',
+                pos: 1,
                 shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                 fullDescription: {
+                fullDescription: {
                     projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
@@ -80,15 +83,16 @@ export const EXPERIENCE = [
                     roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                 },
-                 
+                },
+
             },
             {
                 name: 'C# Developer',
+                pos: 2,
                 shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                 fullDescription: {
+                fullDescription: {
                     projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
@@ -98,8 +102,8 @@ export const EXPERIENCE = [
                     roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
                                 ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                 },
-                 
+                },
+
             }
         ]
     }

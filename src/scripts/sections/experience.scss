@@ -1,6 +1,7 @@
 #experience__section {
-
-
+  .border__container {
+    position: relative;
+  }
   .company_timelines {
     width: 100%;
   }
@@ -24,15 +25,50 @@
 
   .company_title {
     font-size: 3rem;
-    fill: #dadada
+    fill: #dadada;
   }
 
-  .position_title{
+  .position_title {
     font-size: 1.5rem;
-    fill: #dadada
+    fill: #dadada;
   }
 
   .desc-text {
     color: #dadada;
+  }
+
+  .hover-rect {
+    fill: transparent;
+  }
+  .position-svg-container {
+    text {
+      pointer-events: none;
+    }
+    foreignObject {
+      pointer-events: none;
+    }
+  }
+
+  .description-container {
+    position: absolute;
+    background-color: #dadada;
+    padding: 1rem 2rem 1rem 2rem;
+    .company {
+      color: #434343;
+      .c_name {
+        padding-bottom: 1rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .cross-line {
+    transform-box: fill-box;
+    transform-origin: center;
+    stroke: #434343;
+  }
+  .cross-group {
+    cursor: pointer;
+    fill: transparent;
   }
 }

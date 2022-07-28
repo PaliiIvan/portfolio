@@ -235,7 +235,7 @@ export function showPage(page) {
 
 export function rPosition(value, attr) {
 
-    return function() {
+    return function () {
         /**
          * @type {HTMLBaseElement} currentElem
          */
@@ -245,5 +245,28 @@ export function rPosition(value, attr) {
         console.log(rect);
         return (rect[attr] + value);
     }
-   
+
+}
+
+
+
+
+
+
+
+/**
+ * 
+ @type {import('../types/types').createSvg}
+ */
+export const createSvg = (name) => {
+    let elem = document.createElementNS('http://www.w3.org/2000/svg', name);
+
+
+    return ({
+        elem,
+        attr(qualifiedName, value) {
+            this.elem.setAttribute(qualifiedName, value);
+            return this;
+        }
+    })
 }
