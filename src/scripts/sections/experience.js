@@ -186,9 +186,8 @@ function drawSvg(data) {
             event.stopImmediatePropagation();
             shouldStopReverseAnimation = true;
             let rectangleActiveTml = makePositionActive(rect, divContainer, nameNode);
-            let positionInformationTm = showInformationContainer(this);
-            displayPositionInformation(positionData, data.company);
-            let crossGroup;
+            let positionInformationTm = showInformationContainer(this, () => displayPositionInformation(positionData, data.company));
+
             const closePositionDescription = () => {
                 onCloseClick({
                     contentRectTimeline: positionInformationTm,

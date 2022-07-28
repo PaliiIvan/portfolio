@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap, { Power1 } from "gsap";
 import * as d3 from "d3";
 import { createSvg } from "../helpers";
 /**
@@ -107,32 +107,11 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
  * @param {{borderTm: gsap.core.Timeline}}  borderTm
 **/
 export function resetBorder({ borderTm, borderGroup }) {
+    borderTm.vars.onReverseComplete = () => {
+        borderGroup.node().remove();
+    };
 
-
-    const showCircle = () => {
-        borderGroup.remove();
-    }
-
-
-    borderTm.vars.onReverseComplete = showCircle;
-    borderTm.vars.onComplete = showCircle;
-    borderTm.pause();
     borderTm.reverse();
-
-
-
-
-
-    // circle.selection.transition()
-    //     .attr('cy', circleOldPos)
-    //     .attr('r', circle.r)
-    //     .end()
-    //     .then(() => {
-    //         borderTm.reverse();
-    //     })
-    //     .catch(() => {
-    //         //borderGroup.remove();
-    //     })
 }
 
 /**
@@ -166,8 +145,9 @@ export function makePositionActive(rect, divContainer, nameNode) {
 /**
  * 
  * @param {SVGGElement} activeGroup 
+ * @param {() => void} onAnimationComplete 
  */
-export function showInformationContainer(activeGroup) {
+export function showInformationContainer(activeGroup, onAnimationComplete) {
     const groupPos = activeGroup.querySelector('rect').getBoundingClientRect();
     const borderContainer = document.querySelector('#experience__section .border__container');
     const isOnLeft = groupPos.x > (window.innerWidth / 2) ? false : true;
@@ -187,13 +167,40 @@ export function showInformationContainer(activeGroup) {
     const tm = gsap.timeline();
 
     if (isOnLeft) {
-        tm.fromTo(rect, { ...style, opacity: 0 }, { duration: 2, opacity: 1, left: 'inherit', right: '0%', })
-            .to(rect, { top: '5%' })
-            .to(rect, { height: '95%' });
+        tm.fromTo(
+            rect,
+            {
+                duration: 0,
+                height: 0,
+                left: 'inherit',
+                right: '0%',
+                top: '5%',
+                opacity: 0,
+                width: style.width,
+            },
+            {
+                duration: 1,
+                height: '95%',
+                onComplete: onAnimationComplete
+            }
+        );
     } else {
-        tm.fromTo(rect, { ...style, opacity: 0 }, { duration: 2, opacity: 1, left: '5%', })
-            .to(rect, { top: '5%' })
-            .to(rect, { height: '95%' });
+        tm.fromTo(
+            rect,
+            {
+                duration: 0,
+                top: '5%',
+                left: '5%',
+                width: style.width,
+                height: 0,
+            },
+            {
+                duration: 2,
+                height: '95%',
+                ease: Power1.easeInOut,
+                onComplete: onAnimationComplete
+            }
+        );
     }
 
 
