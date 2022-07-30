@@ -52,11 +52,39 @@
   .description-container {
     position: absolute;
     background-color: #dadada;
-    //padding: 1rem 2rem 1rem 2rem;
+    color: #434343;
     .company {
-      color: #434343;
       .c_name {
+        font-size: 2rem;
         padding-bottom: 1rem;
+        font-weight: bold;
+      }
+      .c_description {
+        font-size: 0.9rem;
+      }
+    }
+    .p_name {
+      font-size: 2rem;
+      padding-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .p_description {
+      font-size: 0.9rem;
+    }
+
+    .p_responsibilities {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .teh-stack {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+
+      :first-child {
         font-weight: bold;
       }
     }

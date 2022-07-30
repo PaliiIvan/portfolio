@@ -22,88 +22,39 @@ export const PAGESStr = {
 
 export const EXPERIENCE = [
     {
-        company: 'Amdaris',
-        positions: [
-            {
-                name: 'Full-Stack Developer',
-                pos: 0,
-                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                fullDescription: {
-                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                },
-
-            }
-        ]
-    },
-    {
         company: 'Pentalog',
         positions: [
             {
                 name: 'Front-End Developer',
                 pos: 0,
-                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                fullDescription: {
-                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                },
-
+                shortDescription: `Digital Show Room is a project where
+                managers can prepare presentations for new products for biggest customers,
+                where they provide all information about the products and the season for which they will be released.`,
+            }
+        ]
+    },
+    {
+        company: 'Amdaris',
+        positions: [
+            {
+                name: 'Front-End Developer',
+                pos: 0,
+                shortDescription: `This service was developed for internal use of the company. The main goal of the project was to track and
+                process all transactions within different departments of the company and clients. The main idea was to create
+                a multi-level verification of a transaction depending on its cost level.`,
             },
             {
                 name: 'Full-Stack Developer',
                 pos: 1,
-                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                fullDescription: {
-                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                },
+                shortDescription: `The goal of the project was to create a service that quickly allowed the integration of the payment system in any web store.
+                One of the key features of the project was the complete customization of pages for the client, including the logo and theme of the site.`,
 
             },
             {
-                name: 'C# Developer',
+                name: 'Full Stack .NET Developer',
                 pos: 2,
-                shortDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                fullDescription: {
-                    projectDesc: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`,
-                    roleDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Qui earum error deserunt reprehenderit id a dolore, eaque culpa possimus nam 
-                                ipsa neque odit consequatur excepturi! Atque sit consectetur laudantium esse.`
-                },
-
+                shortDescription: ` This project was developed for one of the closed yacht clubs for ship insurance. Thanks to this service, the
+                club could quickly and flexibly set up an insurance contract for any club members anywhere in the world.`,
             }
         ]
     }
