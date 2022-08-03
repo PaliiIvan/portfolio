@@ -8,15 +8,13 @@ export const SCROLL_DIRECTION = {
 export const PAGES = {
     ABOUT: 0,
     SKILLS: 1,
-    EXPERIENCE: 2,
-    PROJECTS: 3
+    EXPERIENCE: 2
 }
 
 export const PAGESStr = {
     ABOUT: 'ABOUT',
     SKILLS: 'SKILLS',
-    EXPERIENCE: 'EXPERIENCE',
-    PROJECTS: 'PROJECTS'
+    EXPERIENCE: 'EXPERIENCE'
 }
 
 

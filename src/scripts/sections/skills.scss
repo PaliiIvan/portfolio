@@ -64,12 +64,14 @@
     @include skill;
     font-size: 1.5rem;
     font-weight: bold;
+    fill: linear-gradient(270deg, #211b35, #424242);
   }
 
   .skill_lvl_3 {
     @include skill;
     font-size: 0.8rem;
     font-weight: bold;
+    fill: linear-gradient(270deg, #211b35, #424242);
   }
 
   .cross-line {

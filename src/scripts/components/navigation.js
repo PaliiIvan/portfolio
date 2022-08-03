@@ -4,10 +4,10 @@ import { PageInitHandlers, PAGES, PAGESStr, SCROLL_DIRECTION } from "../constant
 import { iteratePage, PageHandel, showPage } from "../helpers";
 import { navItems, svg_container, topBorder, bottomBorder } from "../selection";
 
-import { Projects } from "../sections/projects";
 import { Experience } from "../sections/experience";
 import { About } from "../sections/about";
 import { Skills } from "../sections/skills";
+import { Resources } from "../resource.loader";
 
 
 
@@ -24,7 +24,7 @@ function init(resources) {
     let currentSectionIndex = 0
     let prevSectionIndex = currentSectionIndex;
     let shouldScroll = true;
-    let currentActiveItem = navItems[PAGES.EXPERIENCE];
+    let currentActiveItem = navItems[PAGES.ABOUT];
 
     changeActiveElement(currentActiveItem, svg_container);
 
@@ -111,7 +111,9 @@ function init(resources) {
         const transitionItem = document.querySelector('.transition');
         const transitionItemWidth = transitionItem.getBoundingClientRect().width;
 
-        pageTransition.fromTo(transitionItem, { x: -transitionItemWidth, duration: 0 }, { x: transitionItemWidth, duration: 4 })
+        pageTransition.fromTo(transitionItem,
+            { x: -transitionItemWidth, duration: 0 },
+            { x: transitionItemWidth, duration: 4 })
             .set(transitionItem, { onComplete: onAnimationEnd, delay: -2.8 });
     }
 
@@ -157,40 +159,56 @@ function init(resources) {
             case PAGES.ABOUT: {
 
                 PageHandel({
-                    onInitPage: () => showPageTransition(() => About.init(resources)),
-                    onReInitPage: () => showPageTransition(() => showPage(PAGES.ABOUT)),
+                    onInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.about_icon]);
+                        showPageTransition(() => About.init(resources));
+                    },
+                    onReInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.about_icon]);
+                        showPageTransition(() => showPage(PAGES.ABOUT))
+                    },
                     page: PAGES.ABOUT
                 })
                 break;
             };
             case PAGES.SKILLS: {
                 PageHandel({
-                    onInitPage: () => showPageTransition(() => Skills.init(resources)),
-                    onReInitPage: () => showPageTransition(() => showPage(PAGES.SKILLS)),
+                    onInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.anvil_page_icon]);
+                        showPageTransition(() => Skills.init(resources))
+                    },
+                    onReInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.anvil_page_icon]);
+                        showPageTransition(() => showPage(PAGES.SKILLS))
+                    },
                     page: PAGES.SKILLS
                 })
                 break;
             };
             case PAGES.EXPERIENCE: {
                 PageHandel({
-                    onInitPage: () => showPageTransition(() => Experience.init(resources)),
-                    onReInitPage: () => showPageTransition(() => showPage(PAGES.EXPERIENCE)),
+                    onInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.sword_border]);
+                        showPageTransition(() => Experience.init(resources))
+                    },
+                    onReInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.sword_border]);
+                        showPageTransition(() => showPage(PAGES.EXPERIENCE))
+                    },
                     page: PAGES.EXPERIENCE
-                })
-                break;
-            };
-            case PAGES.PROJECTS: {
-                PageHandel({
-                    onInitPage: () => showPageTransition(() => Projects.init(resources)),
-                    onReInitPage: () => showPageTransition(() => showPage(PAGES.PROJECTS)),
-                    page: PAGES.PROJECTS
                 })
                 break;
             };
             default: {
                 PageHandel({
-                    onInitPage: () => showPageTransition(() => About.init(resources)),
-                    onReInitPage: () => showPageTransition(() => showPage(PAGES.ABOUT)),
+                    onInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.sword_border]);
+                        showPageTransition(() => About.init(resources))
+                    },
+                    onReInitPage: () => {
+                        changeTransitionBlockImage(resources[Resources.sword_border]);
+                        showPageTransition(() => showPage(PAGES.ABOUT))
+                    },
                     page: PAGES.ABOUT
                 })
                 break;
@@ -204,7 +222,31 @@ function init(resources) {
         timelines.timelineTop.restart();
     }
 
+    function changeTransitionBlockImage(image) {
+        const treeContainer = document.querySelector('.transition');
+        treeContainer.innerHTML = image;
+        const svg = treeContainer.querySelector('svg');
 
+        const circ_out = svg.querySelector('#circ_out');
+        const circ_in = svg.querySelector('#circ_in');
+
+
+
+
+        gsap.to(circ_out, {
+            duration: 3,
+            rotation: 180,
+            transformOrigin: 'center'
+        });
+
+        gsap.to(circ_in, {
+            duration: 3,
+            rotation: -90,
+            transformOrigin: 'center'
+        })
+
+
+    }
 
 
 }

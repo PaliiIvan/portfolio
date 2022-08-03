@@ -3,7 +3,7 @@ import * as D3 from "d3";
 import { calculateMiddleValue, rectCollide, initiateDrugEvents, showPage } from "../helpers";
 import "./skills.scss";
 import { line, thresholdScott } from "d3";
-import { animateBuildingBlocks, closeSkillDescription, createCrossIcon, deselectSkill, openSkillDescription } from "./skills.utils";
+import { addGradient, animateBuildingBlocks, closeSkillDescription, createCrossIcon, deselectSkill, openSkillDescription } from "./skills.utils";
 import { PAGES } from "../constants";
 
 const SkillsDataOptions = {
@@ -74,13 +74,17 @@ let isBuilded = false;
 export function init(resources) {
     showPage(PAGES.SKILLS);
 
-    const svg = createSvg();
+    createSvg();
+
 
     //main__draw__container
     function createSvg() {
         const svg = D3.select(".skills__section__content")
             .append("svg")
             .attr("class", "main__draw__container");
+
+        addGradient(svg.node());
+
         const { width, height } = svg.node().getBoundingClientRect();
 
         const data = SkillsData.map((d, index) => ({
@@ -117,6 +121,7 @@ export function init(resources) {
             .attr('opacity', 0)
             .attr("width", (d) => d.width)
             .attr("height", (d) => d.height)
+            .attr('fill', "url('#skill_gradient')")
 
 
 

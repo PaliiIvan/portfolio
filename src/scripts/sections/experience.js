@@ -3,7 +3,7 @@ import { createSvg, rPosition, showPage } from "../helpers";
 import { sections } from "../selection";
 import "./experience.scss";
 import * as d3 from "d3";
-import { addContentToCards, addEventListenersToCards, animateBlockHover, displayPositionInformation, drawMainComponents, makePositionActive, onCloseClick, resetBorder, showCloseIcon, showInformationContainer } from "./experience.utils";
+import { addContentToCards, addEventListenersToCards, animateAllPageOnFirstLoad, animateBlockHover, displayPositionInformation, drawMainComponents, makePositionActive, onCloseClick, resetBorder, showCloseIcon, showInformationContainer } from "./experience.utils";
 
 
 
@@ -46,8 +46,9 @@ function drawSvg(data) {
         subCircles,
         subItemsG,
         subCirclesPositions
-    } = drawMainComponents(data, mainCircleSizeR, svgContainer)
+    } = drawMainComponents(data, mainCircleSizeR, svgContainer);
 
+    animateAllPageOnFirstLoad(line, mainCircle, subCircles, subItemsG);
 }
 
 

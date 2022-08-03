@@ -1,9 +1,15 @@
 export const Resources = {
     yggdrasil: 'yggdrasil',
+    anvil_page_icon: 'anvil_page_icon',
+    sword_border: 'sword_border',
+    about_icon: 'about_icon'
 }
 
 const resourcesList = [
     { name: Resources.yggdrasil, loader: () => import('../asset/icons/tree.m.svg') },
+    { name: Resources.anvil_page_icon, loader: () => import('../asset/icons/anvil_page_icon.m.svg') },
+    { name: Resources.sword_border, loader: () => import('../asset/icons/sword_border.m.svg') },
+    { name: Resources.about_icon, loader: () => import('../asset/icons/about_icon.m.svg') },
 ]
 
 

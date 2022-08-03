@@ -1,9 +1,9 @@
-import gsap from "gsap";
-
+import gsap, { Power1 } from "gsap";
+import * as d3 from 'd3';
 import { Resources } from "../resource.loader";
 import { sections } from "../selection";
 
-import "../../styles/about.scss";
+import "./about.scss";
 import { showPage } from "../helpers";
 import { PAGES } from "../constants";
 

@@ -108,20 +108,6 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
     return ({ borderTm, borderGroup });
 }
 
-// /**
-//  * 
-//  * @param {{borderTm: gsap.core.Timeline}}  borderTm
-// **/
-// export function resetBorder({ borderTm, borderGroup }, id) {
-//     borderTm.vars.onReverseComplete = () => {
-//         id = id.split(' ').join('.');
-//         console.log(id);
-//         let res = document.querySelector(`.${id}`);
-//         res.remove();
-//     };
-
-//     borderTm.reverse();
-// }
 
 /**
  * 
@@ -236,14 +222,94 @@ export function displayPositionInformation(data, companyName) {
     const template = document.querySelector('.experience-template').content;
     const companyDescription = template.querySelector(`.company-description .${companyName}`)
     const contentContainer = document.getElementById('position-content-container');
+    const contentContainerRectData = contentContainer.getBoundingClientRect();
     const companyDescriptionClone = companyDescription.cloneNode(true);
     const position = template.querySelector(`[data-id="${data.name}-${companyName}"]`);
     const positionClone = position.cloneNode(true);
+    const isOnLeft = contentContainerRectData.x > (window.innerWidth / 2) ? false : true;
 
     companyDescriptionClone.style.padding = ('1rem 2rem 1rem 2rem');
     positionClone.style.padding = ('1rem 2rem 1rem 2rem')
     contentContainer.append(companyDescriptionClone);
     contentContainer.append(positionClone);
+
+    gsap.from('#position-content-container .c_name', {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 1
+    });
+
+    gsap.from('#position-content-container .c_description', {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 2,
+        delay: 0.2
+    });
+
+    gsap.from('#position-content-container .p_name', {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 1
+    });
+
+    gsap.from('#position-content-container .p_description', {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 2,
+        delay: 0.2
+    });
+
+    gsap.from('#position-content-container .p_responsibilities', {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 1.5
+    });
+
+    const allLi = document.querySelectorAll('.resp-list li');
+
+    const scaleAllLi = d3.scaleLinear().range([1.5, 2.5]).domain([0, allLi.length]);
+    allLi.forEach((x, i) => {
+        gsap.from(x, {
+            opacity: 0,
+            delay: 0.2,
+            x: isOnLeft ? - 1000 : 2000,
+            duration: scaleAllLi(i)
+        })
+    });
+
+    const tehStack = document.querySelectorAll('.teh-stack');
+    const tehStackUl = document.querySelectorAll('.teh-stack-container span');
+
+
+    gsap.from(tehStack, {
+        x: isOnLeft ? -1000 : 2000,
+        opacity: 0,
+        duration: 1.5
+    })
+
+    const scaleTehSpan = d3.scaleLinear().range([1.5, 2.5]).domain([0, tehStackUl.length]);
+    if (isOnLeft) {
+
+        Array.from(tehStackUl).reverse().forEach((x, i) => {
+
+            gsap.from(x, {
+                opacity: 0,
+                delay: 0.2,
+                x: isOnLeft ? - 2000 : 2000,
+                duration: scaleTehSpan(i)
+            })
+        })
+    } else {
+        tehStackUl.forEach((x, i) => {
+            gsap.from(x, {
+                opacity: 0,
+                delay: 0.2,
+                x: isOnLeft ? - 2000 : 2000,
+                duration: scaleTehSpan(i)
+            })
+        });
+    }
+
 }
 
 
@@ -317,7 +383,7 @@ export function showCloseIcon(activeGroup, onClick) {
 
     });
 
-    return crossXGroup;
+    return crossTimeLine;
 }
 
 
@@ -326,14 +392,21 @@ export function onCloseClick({ rectangleTimeLine, contentRectTimeline, onComplet
     contentRectTimeline.vars.onReverseComplete = () => {
         rectangleTimeLine.reverse();
         onComplete();
-        document.getElementById('position-content-container').remove();
-    };
 
+    };
+    removePositionData('close');
     contentRectTimeline.reverse()
+
 }
 
 
-
+/**
+ * 
+ * @param {*} data 
+ * @param {number} mainCircleSizeR 
+ * @param {d3.Selection} svgContainer 
+ * @returns 
+ */
 export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
     const positionsArr = data.positions.map(x => x);
     const { width, height } = svgContainer.node().getBoundingClientRect();
@@ -362,7 +435,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .attr('r', mainCircleSizeR)
         .attr('fill', '#dadada');
 
-    const circlesStep = Math.floor(linePosition.y2 / 4);
+    const circlesStep = Math.floor((linePosition.y2 + 50) / 4);
     let subCirclesPositions = [];
 
     const subCircles = lineG
@@ -402,10 +475,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .attr('class', 'position-svg-container');
 
 
-    const itemH = 176;
-
     subItemsG
-        .attr('transform', 'translate(1,1)')
         .attr('id', d => `${d.name}-${data.company}`)
         .append('text')
         .attr('class', 'position_title')
@@ -424,7 +494,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
             return subCirclesPositions[i] + 25;
         })
         .attr('width', width - linePosition.x1 - 50)
-        .attr('height', itemH - 32)
+
         .html((d) => `<div>${d.shortDescription}</div>`);
 
     subItemsG.each((sb, index, g) => {
@@ -435,9 +505,16 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
     });
 
 
+    let currentSelectedElemId = null;
+    let lastRectAnimation = {}
+    let evMap = new Map();
+
     subItemsG.each(function (positionData, index, arr) {
         let hoverAnimationResult;
         const id = this.getAttribute('id');
+
+        evMap.set(id, { shouldStopReverseAnimation: false });
+
         const divContainer = this.querySelector('div');
         const nameNode = this.querySelector('text');
         const { x, y, height } = this.getBBox();
@@ -445,7 +522,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         const circle = subCircles.filter((f, i) => i === positionData.pos);
         const lineX1 = line.attr('x1');
 
-        let shouldStopReverseAnimation = false;
+
 
         const rect = createSvg('rect')
             .attr('x', lineX1)
@@ -460,7 +537,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         this.addEventListener('mouseover', (event) => {
             event.stopPropagation();
             event.stopImmediatePropagation();
-            if (!shouldStopReverseAnimation) {
+            if (!evMap.get(id).shouldStopReverseAnimation) {
                 hoverAnimationResult = animateBlockHover(rect, svgContainer, circle, circleOldPos, id);
             }
         })
@@ -469,18 +546,36 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
             event.stopPropagation();
             event.stopImmediatePropagation();
 
-            if (!shouldStopReverseAnimation) {
+            if (!evMap.get(id).shouldStopReverseAnimation) {
                 hoverAnimationResult.borderTm.reverse();
             }
 
         });
 
-        this.addEventListener('click', function (event) {
+        this.addEventListener('click', async function (event) {
             event.stopPropagation();
             event.stopImmediatePropagation();
-            shouldStopReverseAnimation = true;
-            let rectangleActiveTml = makePositionActive(rect, divContainer, nameNode);
+
+            if (currentSelectedElemId == id) {
+                return;
+            }
+
+
+            if (currentSelectedElemId) {
+                console.log('someOtherAnimation');
+                removePositionData();
+                lastRectAnimation.borderTm.reverse();
+                lastRectAnimation.rectangleActiveTml.reverse();
+                lastRectAnimation.crossTimeLine.reverse();
+                evMap.set(lastRectAnimation.id, { ...evMap.get(lastRectAnimation.id), shouldStopReverseAnimation: false });
+            }
+
+            currentSelectedElemId = id;
+
+            evMap.set(id, { ...evMap.get(id), shouldStopReverseAnimation: true });
             let positionInformationTm = showInformationContainer(this, () => displayPositionInformation(positionData, data.company));
+            let rectangleActiveTml = makePositionActive(rect, divContainer, nameNode);
+
 
             const closePositionDescription = () => {
                 onCloseClick({
@@ -488,13 +583,19 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
                     rectangleTimeLine: rectangleActiveTml,
                     onComplete: () => {
                         hoverAnimationResult.borderTm.reverse();
-                        shouldStopReverseAnimation = false;
+                        evMap.set(id, { ...evMap.get(id), shouldStopReverseAnimation: false });
+                        currentSelectedElemId = null;
                     }
                 })
             }
 
-            showCloseIcon(this, closePositionDescription);
-
+            const crossTimeLine = showCloseIcon(this, closePositionDescription);
+            lastRectAnimation = {
+                rectangleActiveTml,
+                crossTimeLine,
+                borderTm: hoverAnimationResult.borderTm,
+                id
+            }
 
         })
 
@@ -503,7 +604,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
     });
 
     return ({
-        line,
+        line: line,
         subItemsG,
         subCircles,
         mainCircle,
@@ -521,4 +622,87 @@ export function addEventListenersToCards(subItemsG, svgContainer, line) {
     const { width, height, x, y } = svgContainer.node().getBoundingClientRect();
 
 
+}
+
+export function removePositionData(event) {
+    const contentToRemove = document.querySelector('#position-content-container');
+
+    const allDiv = contentToRemove.querySelectorAll('div');
+
+    if (event === 'close') {
+        Array.from(allDiv).reverse().forEach(x => {
+            gsap.to(x, {
+                opacity: 0,
+                duration: 0.05
+            }, '+=0.04');
+        })
+    }
+
+    // contentToRemove.forEach(c => {
+    let anim = gsap.to(contentToRemove, {
+        delay: 1,
+        duration: 0.5,
+        opacity: 0,
+        onComplete() {
+            contentToRemove.remove();
+        }
+    })
+    // })
+
+
+}
+
+
+/**
+ * 
+ * @param {d3.Selection} line 
+ * @param {d3.Selection} circleBig 
+ * @param {d3.Selection} circlesSmall 
+ * @param {d3.Selection} leftRectangles 
+ */
+export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRectangles) {
+    const lineNode = line.node();
+    const lineY2 = +line.attr('y2');
+    const circleCy = +circleBig.attr('cy');
+    const circleBigNode = circleBig.node();
+    const circleSmallNode = circlesSmall.node();
+    const leftRectsNode = leftRectangles.node();
+    const mainCirclePos = circleBigNode.getBBox();
+
+    const tm = gsap.timeline();
+
+    tm.from(lineNode, {
+        duration: 0.5,
+        attr: {
+            y1: lineY2,
+        },
+    });
+
+    tm.from(circleBigNode, {
+        attr: {
+            cy: lineY2,
+        },
+        r: 0
+    })
+
+
+    circlesSmall.each(function (x, i) {
+        tm
+            .addLabel(`test_${i}`)
+            .from(this, {
+                duration: 0.5,
+                attr: {
+                    cy: lineY2,
+                    r: 0,
+                },
+            }, `-=0.3`)
+    });
+
+    leftRectangles.each(function (x, i) {
+        tm.from(this, {
+            delay: 0.5,
+            duration: 1,
+            y: lineY2,
+        }, `test_${i}-=0.2`);
+    })
 }

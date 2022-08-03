@@ -1,6 +1,7 @@
 import * as D3 from "d3";
 import { index, transition } from "d3";
 import gsap from "gsap";
+import { createSvg } from "../helpers";
 
 /**
  *
@@ -327,7 +328,7 @@ export function openSkillDescription(selectedNode, svg, nodes) {
         });
       });
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 
 export function closeSkillDescription() {
@@ -360,4 +361,22 @@ export function closeSkillDescription() {
     .catch((err, e) => {
       skillDescG.remove();
     });
+}
+
+
+/**
+ * 
+ * @param {SVGElement} container 
+ */
+export function addGradient(container) {
+
+
+  const g = createSvg('g').elem;
+  g.innerHTML = `
+  <linearGradient id="skill_gradient" x1="0%" y1="100%" x2="100%" y2="0%" gradientUnits="objectBoundingBox">
+    <stop stop-color="#3B3B3B" />
+    <stop offset="1" stop-color="#2e2a5b" />
+  </linearGradient>`
+
+  container.append(g);
 }

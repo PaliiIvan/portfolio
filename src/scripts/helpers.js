@@ -11,7 +11,7 @@ export function iteratePage(index, goOnTop) {
             return index;
         }
     } else {
-        if (index < 3) {
+        if (index < 2) {
             return ++index;
         } else {
             return index;
@@ -219,8 +219,6 @@ export function Sections(name) {
             return experience__section
         case PAGES.SKILLS:
             return skills_section
-        case PAGES.PROJECTS:
-            return projects__section
     }
 }
 
