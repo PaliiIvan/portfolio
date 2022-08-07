@@ -4,7 +4,8 @@
   align-self: stretch;
   svg {
     path {
-      fill: #dadada !important;
+      stroke: #dadada;
+      fill: transparent;
     }
   }
 }
@@ -21,6 +22,9 @@
     flex-direction: column;
     .hello_text {
       font-size: 5rem;
+      span {
+        display: inline-block;
+      }
     }
     .description_text {
       margin-top: 2.5rem;

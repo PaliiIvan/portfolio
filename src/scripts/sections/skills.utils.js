@@ -28,8 +28,8 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
   ) {
     for (let yIteration = 0; yIteration < maxInColBig - 1; yIteration++) {
       const recPosition = {
-        x: xIteration * 260 + 10,
-        y: yIteration * 260 + 10,
+        x: xIteration * 260 + 10 + 125,
+        y: yIteration * 260 + 10 + 125,
       };
       coordBig.push(recPosition);
 
@@ -41,6 +41,7 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
 
   iterator = 0;
   const lastPosition = coordBig.at(-1);
+  console.log(lastPosition);
   loop: for (
     let xIteration = 0;
     xIteration < Math.ceil(nodesMid.size() / maxInColSmall) * 2;
@@ -48,12 +49,14 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
   ) {
     for (let yIteration = 0; yIteration < maxInColSmall - 1; yIteration++) {
       const recPosition1 = {
-        x: lastPosition.x + xIteration * 130,
-        y: lastPosition.y + 250 + yIteration * 130 + 10,
+        x: lastPosition.x + xIteration * 130 - 60,
+        y: lastPosition.y + 250 + yIteration * 130 + 10 - 60,
+        r: 60
       };
       const recPosition2 = {
-        x: lastPosition.x + (xIteration + 1) * 130,
-        y: lastPosition.y + 250 + yIteration * 130 + 10,
+        x: lastPosition.x + (xIteration + 1) * 130 - 60,
+        y: lastPosition.y + 250 + yIteration * 130 + 10 - 60,
+        r: 60
       };
       coordSmall.push(recPosition1);
       coordSmall.push(recPosition2);
@@ -108,18 +111,6 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
   return transition;
 }
 
-/**
- * @type {{
- * lineContainer: D3.Selection
- * lineLeft: D3.Selection
- * lineRight: D3.Selection
- * }}
- */
-var prevNode = {
-  lineContainer: null,
-  lineLeft: null,
-  lineRight: null,
-};
 
 /**
  *
@@ -127,116 +118,89 @@ var prevNode = {
  * @param {(event: MouseEvent) => void} onClick
  */
 export async function createCrossIcon(node, onClick) {
-  if (prevNode.lineContainer) {
-    prevNode.lineLeft
-      .transition()
-      .duration(500)
-      .attr("x1", "90%")
-      .attr("x2", "90%")
-      .end()
-      .catch(() => {
-        console.log("transition canceled", 118);
-      });
+  const contentContainer = document.querySelector('.skill');
 
-    await prevNode.lineRight
-      .transition()
-      .duration(500)
-      .attr("x1", "90%")
-      .attr("x2", "90%")
-      .end()
-      .catch(() => {
-        console.log("transition canceled", 126);
-      });
+  const divForCross = document.createElement('div');
+  divForCross.classList.add('cross-icon');
+  const svg = createSvg('svg').attr('width', '1em').attr('height', '1em').elem;
 
-    prevNode.lineContainer.remove();
-  }
+  const g = createSvg('g').elem;
+  const lineLeft = createSvg('line');
 
-  node = D3.select(node);
-
-  let crossTransition = D3.transition().ease(D3.easeCubicInOut).duration(500);
-  let lineContainer = node
-    .append("svg")
-    .attr("width", (d) => d.width)
-    .attr("height", (d) => d.height)
-    .attr("class", "cross-icon")
-    .on("click", onClick);
-
-  let selectionArea = lineContainer
-    .append("rect")
-    .attr("x", "82.5%")
-    .attr("y", "2.5%")
-    .attr("width", "15%")
-    .attr("height", "15%")
-    .style("fill", "transparent")
-    .style("stroke", "none");
-
-  let lineLeft = lineContainer
-    .append("line")
-    .attr("x1", "90%")
-    .attr("x2", "90%")
-    .attr("y1", "10%")
-    .attr("y2", "10%")
-    .attr("transform", "rotate(-45)")
-    .attr("class", "cross-line");
-
-  let lineRight = lineLeft.clone().attr("transform", "rotate(45)");
 
   lineLeft
-    .transition(crossTransition)
-    .attr("x1", "85%")
-    .attr("x2", "95%")
-    .end()
-    .catch(() => {
-      console.log("transition canceled", 169);
-    });
+    .attr('x1', 0)
+    .attr('x2', '1em')
+    .attr('y1', 0)
+    .attr('y2', '1em')
+    .attr('stroke-width', '0.07em')
+    .attr('class', 'cross-line');
+
+  const lineRight = lineLeft.elem.cloneNode(true);
 
   lineRight
-    .transition(crossTransition)
-    .attr("x1", "85%")
-    .attr("x2", "95%")
-    .end()
-    .catch(() => {
-      console.log("transition canceled", 176);
-    });
+    .setAttribute('transform', 'rotate(90)');
 
-  prevNode = {
-    lineLeft,
-    lineContainer,
-    lineRight,
-  };
+  let ll = gsap.fromTo(lineLeft.elem, {
+    attr: {
+      x1: '0.5em',
+      x2: '0.5em',
+      y1: '0.5em',
+      y2: '0.5em',
+    }
+  }, {
+    attr: {
+      x1: '0em',
+      x2: '1em',
+      y1: '0em',
+      y2: '1em',
+    },
+    duration: 0.5,
+  });
+
+  let lr = gsap.fromTo(lineRight, {
+    attr: {
+      x1: '0.5em',
+      x2: '0.5em',
+      y1: '0.5em',
+      y2: '0.5em',
+    }
+  }, {
+    attr: {
+      x1: '0em',
+      x2: '1em',
+      y1: '0em',
+      y2: '1em',
+    },
+    duration: 0.5,
+  });
+
+
+
+  g.appendChild(lineLeft.elem);
+  g.appendChild(lineRight);
+  svg.appendChild(g);
+  divForCross.append(svg);
+  contentContainer.append(divForCross);
+
+  divForCross.addEventListener('click', (ev) => {
+    onClick(ev);
+    lr.reverse();
+    ll.reverse();
+  });
+
 }
 
 /**
  *
  * @param {D3.Selection} nodes
  */
-export async function deselectSkill(nodes) {
+export async function deselectSkill(nodes, simulation) {
   nodes
     .transition()
     .duration(1000)
-    .attr("transform", (d) => `translate(${d.x}, ${d.y})`);
-
-  if (prevNode.lineContainer) {
-    prevNode.lineLeft
-      .transition()
-      .duration(500)
-      .attr("x1", "90%")
-      .attr("x2", "90%")
-      .end();
-
-    try {
-      await prevNode.lineRight
-        .transition()
-        .duration(500)
-        .attr("x1", "90%")
-        .attr("x2", "90%")
-        .end();
-    } catch (err) {
-      console.log("transition canceled");
-    }
-
-    prevNode.lineContainer.remove();
-  }
+    .attr("transform", (d) => `translate(${d.x}, ${d.y})`)
+    .end().then(x => simulation.restart());
 
   nodes.nodes().forEach((elem) => elem.classList.remove("active"));
 }
@@ -247,17 +211,24 @@ export async function deselectSkill(nodes) {
  * @param {D3.Selection} svg
  * @param {D3.Selection} nodes
  */
-export function openSkillDescription(selectedNode, svg, nodes) {
-  let maxVal = 0;
-  nodes.each((d) => {
-    if (maxVal < d.tx) {
-      if (d.ty <= 50) {
-        maxVal = d.tx;
-      }
+export function openSkillDescription(selectedNode, svg, nodes, onAnimationEnd) {
+  let maxVal = {
+    xPos: 0,
+    r: 0
+  };
+
+  const datArr = nodes.data();
+
+  datArr.forEach(data => {
+    if (data.tx > maxVal.xPos) {
+      maxVal.xPos = data.tx + data.r;
+      maxVal.r = data.r;
     }
+
   });
 
   let svgContainer = document.getElementById("skill-description-g");
+
   if (svgContainer) {
     closeSkillDescription();
   }
@@ -266,7 +237,7 @@ export function openSkillDescription(selectedNode, svg, nodes) {
 
   const { tx, ty, width, name } = D3.select(selectedNode).datum();
 
-  const descriptionPosition = { x: maxVal + 250 + 10, y: 10 };
+  const descriptionPosition = { x: maxVal.xPos + maxVal.r, y: 10 };
   const { width: svgWidth, height: svgHeight } = svg
     .node()
     .getBoundingClientRect();
@@ -274,32 +245,38 @@ export function openSkillDescription(selectedNode, svg, nodes) {
   const emptyWidth = svgWidth - descriptionPosition.x;
   const emptyHeight = svgHeight - descriptionPosition.y;
 
-  const rec = groupForRect
-    .append("rect")
-
+  const backRectangle = createSvg('rect')
     .attr("class", "skill-description")
-    .attr("width", width)
-    .attr("height", width)
     .attr("fill", "#dadada")
     .attr("stroke", "white")
-    .attr("opacity", 0)
-    .attr("x", tx)
-    .attr("y", ty)
-    .transition()
-    .duration(500)
-    .attr("opacity", 1)
-    .attr("x", tx)
-    .attr("y", 10)
-    .transition()
-    .duration(500)
-    .attr("x", descriptionPosition.x)
-    .attr("y", descriptionPosition.y)
-    .transition()
-    .duration(1000)
-    .attr("width", emptyWidth - 2)
-    .attr("height", emptyHeight)
-    .end()
-    .then(() => {
+    .attr("rx", emptyWidth / 2)
+    .attr("ry", emptyHeight / 2)
+    .attr("x", emptyWidth / 2 + descriptionPosition.x)
+    .attr("y", emptyHeight / 2).elem;
+
+  groupForRect.node().append(backRectangle);
+
+  const tm = gsap.timeline();
+
+  let res = tm.to(backRectangle, {
+    duration: 1,
+    attr: {
+      width: emptyHeight - 20,
+      height: emptyHeight - 20,
+      x: descriptionPosition.x / 0.7,
+      y: descriptionPosition.y / 0.7
+    }
+  }).to(backRectangle, {
+    duration: 0.5,
+    attr: {
+      rx: '15px',
+      ry: '15px',
+      width: emptyWidth - 2,
+      height: emptyHeight,
+      x: descriptionPosition.x,
+      y: descriptionPosition.y
+    },
+    onComplete() {
       const skillDescContainer = groupForRect
         .append("foreignObject")
         .attr("x", descriptionPosition.x + 10)
@@ -327,40 +304,64 @@ export function openSkillDescription(selectedNode, svg, nodes) {
           duration: 0.5 + i * 0.4,
         });
       });
-    })
-    .catch(() => { });
+
+      onAnimationEnd();
+    }
+  });
+
+
+  return tm;
 }
 
+/**
+ * 
+ * @param {gsap.core.Timeline} openDescTm 
+ */
 export function closeSkillDescription() {
+
+
   const skillDescG = D3.selectAll("#skill-description-g");
   const descRect = skillDescG.select("rect");
   const currentPosition = {
-    x: +descRect.node().getAttribute("x"),
-    y: +descRect.node().getAttribute("y"),
+    x: +descRect.attr("x"),
+    y: +descRect.attr("y"),
+    width: +descRect.attr("width"),
+    height: +descRect.attr("height"),
   };
+
   const mainHtmlContainer = document.querySelector(
     ".main__draw__container .skill-description-container"
   );
 
+  let tm = gsap.timeline();
   if (mainHtmlContainer) {
-    gsap.to(mainHtmlContainer, { x: 1000, opacity: 0, duration: 1 });
-  }
-
-  descRect
-    .transition()
-    .duration(1000)
-    .attr("width", 0)
-    .attr("height", 0)
-    // .attr('x', currentPosition.x + 1)
-    // .attr('y', currentPosition.y + 4)
-    .style("stroke-width", "-10px")
-    .end()
-    .then(() => {
-      skillDescG.remove();
-    })
-    .catch((err, e) => {
-      skillDescG.remove();
+    gsap.to(mainHtmlContainer, {
+      x: 1000,
+      opacity: 0,
+      duration: 1,
     });
+
+    // tm.to(descRect.node(), {
+    //   duration: 0.3,
+    //   attr: {
+    //     rx: '0px',
+    //     ry: '0px',
+    //   }
+    // });
+
+    tm.to(descRect.node(), {
+      duration: 1,
+      attr: {
+        width: 0,
+        x: currentPosition.width + currentPosition.x + 20,
+        rx: '0px',
+        ry: '0px',
+      },
+      onComplete() {
+        skillDescG.remove();
+      }
+    });
+  }
 }
 
 
@@ -370,13 +371,14 @@ export function closeSkillDescription() {
  */
 export function addGradient(container) {
 
-
   const g = createSvg('g').elem;
   g.innerHTML = `
   <linearGradient id="skill_gradient" x1="0%" y1="100%" x2="100%" y2="0%" gradientUnits="objectBoundingBox">
     <stop stop-color="#3B3B3B" />
     <stop offset="1" stop-color="#2e2a5b" />
-  </linearGradient>`
+  </linearGradient>
+  `
 
   container.append(g);
+
 }

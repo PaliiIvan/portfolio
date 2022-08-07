@@ -17,6 +17,7 @@
     stroke: #dadada;
 
     cursor: pointer;
+
     rect {
       transition: 1s fill;
     }
@@ -31,25 +32,34 @@
       stroke: none;
     }
 
-    &.active {
-      rect {
-        fill: #dadada;
-        transition: 1s fill;
+    circle {
+      z-index: 0;
+    }
+
+    @keyframes activeDashWidth {
+      from {
+        stroke-dasharray: 0;
       }
-      text {
-        fill: #434343;
-        transition: 1s fill;
+
+      to {
+        stroke-dasharray: 30;
       }
     }
 
-    &.hover {
-      rect {
-        fill: #dadada;
-        transition: 1s fill;
+    &.active {
+      circle {
+        animation: activeDashWidth 2s forwards, activeDash 15s infinite linear;
+        stroke-linecap: round;
       }
-      text {
-        fill: #434343;
-        transition: 1s fill;
+
+      @keyframes activeDash {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
     }
   }
@@ -64,14 +74,12 @@
     @include skill;
     font-size: 1.5rem;
     font-weight: bold;
-    fill: linear-gradient(270deg, #211b35, #424242);
   }
 
   .skill_lvl_3 {
     @include skill;
     font-size: 0.8rem;
     font-weight: bold;
-    fill: linear-gradient(270deg, #211b35, #424242);
   }
 
   .cross-line {
@@ -81,7 +89,14 @@
   }
 
   .cross-icon {
-    position: relative;
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
   }
 
   .skill-description {

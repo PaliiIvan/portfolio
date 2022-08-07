@@ -20,10 +20,12 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
 
 
     const rectPos = currentRect.getBBox();
-
+    const rectData = circle.datum();
+    console.log(rectData);
     const borderGroup = svgContainer
         .append('g')
         .attr('class', 'border-container')
+        .attr('data-identificator', `_${id}`)
         .attr('id', `_${id}`);
 
 
@@ -67,9 +69,9 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
     const borderRightNode = borderRight.node();
 
     const borderTm = gsap.timeline({
-        id, onReverseComplete: () => {
-            borderGroup.remove();
-            console.log('border removed', id);
+        id,
+        onReverseComplete: () => {
+            document.querySelectorAll(`[data-identificator='_${id}']`).forEach(x => x.remove());
         }
     });
 
@@ -267,14 +269,14 @@ export function displayPositionInformation(data, companyName) {
 
     const allLi = document.querySelectorAll('.resp-list li');
 
+    let tmAllLi = gsap.timeline();
     const scaleAllLi = d3.scaleLinear().range([1.5, 2.5]).domain([0, allLi.length]);
     allLi.forEach((x, i) => {
-        gsap.from(x, {
+        tmAllLi.from(x, {
             opacity: 0,
-            delay: 0.2,
-            x: isOnLeft ? - 1000 : 2000,
-            duration: scaleAllLi(i)
-        })
+            x: isOnLeft ? -2000 : 2000,
+            duration: 1
+        }, "-=0.5")
     });
 
     const tehStack = document.querySelectorAll('.teh-stack');
@@ -287,26 +289,26 @@ export function displayPositionInformation(data, companyName) {
         duration: 1.5
     })
 
-    const scaleTehSpan = d3.scaleLinear().range([1.5, 2.5]).domain([0, tehStackUl.length]);
+    let tmTehSpan = gsap.timeline();
     if (isOnLeft) {
 
         Array.from(tehStackUl).reverse().forEach((x, i) => {
 
-            gsap.from(x, {
+            tmTehSpan.from(x, {
                 opacity: 0,
-                delay: 0.2,
+                //delay: 0.2,
                 x: isOnLeft ? - 2000 : 2000,
-                duration: scaleTehSpan(i)
-            })
+                duration: 0.8
+            }, "-=0.5")
         })
     } else {
         tehStackUl.forEach((x, i) => {
-            gsap.from(x, {
+            tmTehSpan.from(x, {
                 opacity: 0,
-                delay: 0.2,
-                x: isOnLeft ? - 2000 : 2000,
-                duration: scaleTehSpan(i)
-            })
+                // delay: 0.2,
+                x: isOnLeft ? -2000 : 2000,
+                duration: 0.8
+            }, "-=0.5")
         });
     }
 
@@ -706,3 +708,27 @@ export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRec
         }, `test_${i}-=0.2`);
     })
 }
+
+
+
+// /**
+//  *
+//  * @param {*} circle
+//  */
+// export function makerCircleActive(nodeGroup) {
+//     const realCircleNode = nodeGroup.querySelector('circle');
+
+//     const realCirclePosition = realCircleNode.getBoundingClientRect();
+//     console.log(realCirclePosition);
+//     const circle = createSvg('circle')
+//         .attr('class', 'active-circle')
+//         .attr('stroke-width', 2)
+//         .attr('stroke', '#dadada')
+//         .attr('fill', 'transparent')
+//         // .attr('cy', realCirclePosition.cy)
+//         // .attr('cx', realCirclePosition.cx)
+//         .attr('r', realCirclePosition.width / 2)
+//         .elem;
+
+//     nodeGroup.append(circle);
+// }

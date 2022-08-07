@@ -5,22 +5,26 @@ import "./skills.scss";
 import { line, thresholdScott } from "d3";
 import { addGradient, animateBuildingBlocks, closeSkillDescription, createCrossIcon, deselectSkill, openSkillDescription } from "./skills.utils";
 import { PAGES } from "../constants";
+import { makerCircleActive } from "./experience.utils";
 
 const SkillsDataOptions = {
     TOP: {
         class: "skill_lvl_1",
         width: 250,
         height: 250,
+        r: 125
     },
     MIDDLE: {
         class: "skill_lvl_2",
         width: 120,
         height: 120,
+        r: 60
     },
     LOW: {
         class: "skill_lvl_3",
         width: 74,
         height: 74,
+        r: 30
     },
 };
 
@@ -112,24 +116,27 @@ export function init(resources) {
             .on('click', function (ev, d) {
                 nodes.nodes().forEach(n => n.classList.remove('active'));
                 this.classList.toggle('active');
+
                 simulation.stop();
                 onClick(this);
             });
 
 
-        const rects = nodes.append("rect")
-            .attr('opacity', 0)
-            .attr("width", (d) => d.width)
-            .attr("height", (d) => d.height)
+        const rects = nodes.append("circle")
+            //.attr('opacity', 0)
+            // .attr("width", (d) => d.width)
+            // .attr("height", (d) => d.height)
+            .attr('r', d => d.r)
             .attr('fill', "url('#skill_gradient')")
+
 
 
 
         const textNodes = nodes
             .append('text')
-            .attr('opacity', 0)
-            .attr('x', d => d.width / 2)
-            .attr('y', d => d.height / 2)
+            // .attr('opacity', 0)
+            .attr('x', d => d.cx)
+            .attr('y', d => d.cy)
             .text(d => d.name);
 
         var collisionForce = rectCollide()
@@ -141,52 +148,45 @@ export function init(resources) {
 
         simulation = D3.forceSimulation(data)
             //Disable x y simulation on drag
-            .force("x", D3.forceX(width / 2).strength(0.01))
-            .force("y", D3.forceY(height / 2).strength(0.01))
-            .force("collide", collisionForce)
+            .alphaTarget(0.3)
+            .force("x", D3.forceX(width / 2).strength(0.005))
+            .force("y", D3.forceY(height / 2).strength(0.005))
+            .force("charge", D3.forceManyBody().strength(-10))
+            .force("collide", D3.forceCollide().radius(d => d.r + 5))
             .on("tick", function () {
 
-
                 nodes.attr('transform', function (d) {
-                    const newX = calculateMiddleValue(d.x, width - d.width);
-                    const newY = calculateMiddleValue(d.y, height - d.height);
-
                     return `translate(${d.x}, ${d.y}) rotate(0)`;
                 });
-
-
-                rects.attr("opacity", opacityInterpolate(this.alpha()));
-                textNodes.attr("opacity", opacityInterpolate(this.alpha()));
             });
 
         nodes.call(initiateDrugEvents(simulation))
 
 
         function onClick(currentNode) {
-            rects.transition().duration(1000).attr("opacity", 1);
-            textNodes.transition().duration(1000).attr("opacity", 1);
 
+            //makerCircleActive(currentNode)
             nodes.call(initiateDrugEvents.nullDrag);
 
+            let openDescTm;
             let onCrossXClick = (ev) => {
                 ev.stopPropagation();
-                closeSkillDescription();
-                deselectSkill(nodes)
+                closeSkillDescription(openDescTm);
+                deselectSkill(nodes, simulation)
                 isBuilded = false;
                 nodes.call(initiateDrugEvents.activeDrag);
             };
 
             let onBuildingEnd = () => {
-                createCrossIcon(currentNode, onCrossXClick);
-                openSkillDescription(currentNode, svg, nodes);
+                openDescTm = openSkillDescription(currentNode, svg, nodes, () => createCrossIcon(currentNode, onCrossXClick));
                 isBuilded = true;
             };
 
             if (!isBuilded) {
                 animateBuildingBlocks(nodes, height, onBuildingEnd, isBuilded);
             } else {
-                createCrossIcon(currentNode, onCrossXClick);
-                openSkillDescription(currentNode, svg, nodes);
+                openDescTm = openSkillDescription(currentNode, svg, nodes, () => createCrossIcon(currentNode, onCrossXClick));
+
             }
         }
     }

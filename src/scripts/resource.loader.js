@@ -6,7 +6,7 @@ export const Resources = {
 }
 
 const resourcesList = [
-    { name: Resources.yggdrasil, loader: () => import('../asset/icons/tree.m.svg') },
+    { name: Resources.yggdrasil, loader: () => import('../asset/icons/tree_ordered.m.svg') },
     { name: Resources.anvil_page_icon, loader: () => import('../asset/icons/anvil_page_icon.m.svg') },
     { name: Resources.sword_border, loader: () => import('../asset/icons/sword_border.m.svg') },
     { name: Resources.about_icon, loader: () => import('../asset/icons/about_icon.m.svg') },
