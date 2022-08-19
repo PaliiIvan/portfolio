@@ -1,34 +1,140 @@
-.yggdrasil {
-  width: 131rem;
-  height: fit-content;
-  align-self: stretch;
-  svg {
-    path {
-      stroke: #dadada;
-      fill: transparent;
-    }
-  }
-}
-
 #about_section {
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  flex-direction: row;
-  padding-top: 5rem;
-  gap: 4rem;
-  .text_content {
-    display: flex;
-    flex-direction: column;
-    .hello_text {
-      font-size: 5rem;
-      span {
-        display: inline-block;
+  .main-content {
+    .yggdrasil {
+      width: 50%;
+      z-index: 1;
+      svg {
+        opacity: 0;
+
+        path {
+          stroke: #dadada;
+          fill: transparent;
+        }
       }
     }
-    .description_text {
-      margin-top: 2.5rem;
-      width: 80%;
+
+    display: flex;
+    .text_content {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      .hello_text {
+        margin-top: 1rem;
+        font-size: 7rem;
+        font-family: 'Norse';
+        span {
+          display: inline-block;
+        }
+      }
+      .description_text {
+        width: 50%;
+        margin-top: 2.5rem;
+        z-index: 2;
+      }
+
+      .about {
+        align-self: end;
+        z-index: 2;
+      }
+      .contact_me {
+        align-self: end;
+        margin-top: auto;
+        font-size: 1rem;
+        display: flex;
+        svg {
+          width: 10rem;
+          height: 10rem;
+          cursor: pointer;
+          path {
+            transition: 1s fill;
+            stroke: #dadada;
+            fill: transparent;
+          }
+          &:hover {
+            &#mail {
+              #header {
+                path {
+                  fill: #fff;
+                }
+              }
+              #borders {
+                path {
+                  fill: #ff6a6a;
+                }
+              }
+              #body {
+                path {
+                  fill: #fff;
+                }
+              }
+              #Border {
+                path {
+                  fill: #fdad7a;
+                }
+              }
+            }
+
+            &#linked_in {
+              #Text {
+                path {
+                  fill: #fff;
+                }
+              }
+              #Border {
+                path {
+                  fill: #0a66c2;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .background-content {
+    .circle {
+      background: #384b70;
+      width: 13rem;
+      height: 13rem;
+      position: absolute;
+      top: 10%;
+      left: 70%;
+      border-radius: 50%;
+      animation: circle 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes circle {
+      from {
+        transform: translate(-1rem, -1rem);
+      }
+      to {
+        transform: translate(1rem, 1rem);
+      }
+    }
+
+    .rectangle {
+      background: #b93b3b;
+      width: 27rem;
+      height: 5rem;
+      position: absolute;
+      top: 30%;
+      left: 71%;
+      transform: rotate(129deg);
+      border-radius: 15px;
+    }
+
+    .three-angle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 9rem solid transparent;
+      border-right: 9rem solid transparent;
+      border-bottom: 13rem solid #384b70;
+      top: 70%;
+      left: 5%;
+      z-index: 0;
+      transform: rotate(35deg);
     }
   }
 }

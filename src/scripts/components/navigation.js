@@ -1,8 +1,8 @@
 import { gsap, Power1 } from "gsap";
 
 import { PageInitHandlers, PAGES, PAGESStr, SCROLL_DIRECTION } from "../constants";
-import { iteratePage, PageHandel, showPage } from "../helpers";
-import { navItems, svg_container, topBorder, bottomBorder } from "../selection";
+import { iteratePage, PageHandel, pxToRem, showPage } from "../helpers";
+import { navItems } from "../selection";
 
 import { Experience } from "../sections/experience";
 import { About } from "../sections/about";
@@ -26,21 +26,16 @@ function init(resources) {
     let shouldScroll = true;
     let currentActiveItem = navItems[PAGES.ABOUT];
 
-    changeActiveElement(currentActiveItem, svg_container);
+    //changeActiveElement(currentActiveItem, svg_container);
 
-    const timelines = drawActivePaths(topBorder, bottomBorder);
+    //const timelines = drawActivePaths(topBorder, bottomBorder);
 
 
 
     addWheelHandler(resources);
     addNavItemClickHandler();
-    addResizeHandler();
 
 
-
-    function addResizeHandler() {
-        window.addEventListener('resize', () => changeActiveElement(currentActiveItem, svg_container));
-    }
 
     function addNavItemClickHandler() {
         navItems.forEach((navItem, index) => {
@@ -48,9 +43,9 @@ function init(resources) {
 
                 currentActiveItem = navItem;
                 currentSectionIndex = index;
-                changeActiveElement(currentActiveItem, svg_container);
+                changeActiveElement(currentActiveItem);
                 changeSection(index, resources);
-                animateActiveItem();
+                //animateActiveItem();
 
             })
         });
@@ -62,19 +57,9 @@ function init(resources) {
      * @param {HTMLDivElement} activeElement 
      * @param {SVGElement} svg_container 
      */
-    function changeActiveElement(activeElement, svg_container) {
-        let activePosition = activeElement.getBoundingClientRect();
-        let borderPosition = svg_container.getBoundingClientRect();
-
-        svg_container.style.width = 120;
-        svg_container.style.height = activePosition.height + 18.4;
-        borderPosition = svg_container.getBoundingClientRect();
-
-        const borderCenterX = borderPosition.left + borderPosition.width / 2;
-        const activeElementCenterX = activePosition.left + activePosition.width / 2;
-
-        svg_container.style.left = (borderPosition.left - (borderCenterX - activeElementCenterX));
-        svg_container.style.top = 16;
+    function changeActiveElement(activeElement) {
+        navItems.forEach(navItem => navItem.classList.remove('nav_item--active'));
+        activeElement.classList.add('nav_item--active');
     }
 
     /**
@@ -109,7 +94,7 @@ function init(resources) {
     function showPageTransition(onAnimationEnd) {
         const pageTransition = gsap.timeline();
         const transitionItem = document.querySelector('.transition');
-        const transitionItemWidth = transitionItem.getBoundingClientRect().width;
+        const transitionItemWidth = window.screen.width;
 
         pageTransition.fromTo(transitionItem,
             { x: -transitionItemWidth, duration: 0 },
@@ -247,8 +232,6 @@ function init(resources) {
 
 
     }
-
-
 }
 
 

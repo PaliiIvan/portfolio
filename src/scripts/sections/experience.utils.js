@@ -1,6 +1,6 @@
 import gsap, { Power1 } from "gsap";
 import * as d3 from "d3";
-import { createSvg } from "../helpers";
+import { createSvg, pxToRem, remToPx, toRemStr } from "../helpers";
 /**
  * @param {SVGRectElement} currentG
  * @param {d3.Selection<SVGCircleElement>} circle 
@@ -9,13 +9,12 @@ import { createSvg } from "../helpers";
  */
 export function animateBlockHover(currentRect, svgContainer, circle, circleYPos, id) {
 
-
-    circle.attr('cy', circleYPos);
+    circle.attr('cy', pxToRem(circleYPos));
 
     const circlePos = {
-        x: +circle.attr('cx'),
+        x: remToPx(circle.attr('cx')),
         y: circleYPos,
-        r: +circle.attr('r'),
+        r: remToPx(circle.attr('r')),
     }
 
 
@@ -31,35 +30,35 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
 
     const secondCircle = borderGroup
         .append('circle')
-        .attr('cx', circlePos.x)
-        .attr('cy', circlePos.y)
-        .attr('r', circlePos.r)
+        .attr('cx', pxToRem(circlePos.x))
+        .attr('cy', pxToRem(circlePos.y))
+        .attr('r', pxToRem(circlePos.r))
         .attr('fill', '#dadada');
 
     const borderTop = borderGroup
         .append('line')
-        .attr('x1', circlePos.x)
-        .attr('y1', rectPos.y)
-        .attr('x2', circlePos.x)
-        .attr('y2', rectPos.y)
+        .attr('x1', pxToRem(circlePos.x))
+        .attr('y1', pxToRem(rectPos.y))
+        .attr('x2', pxToRem(circlePos.x))
+        .attr('y2', pxToRem(rectPos.y))
         .attr('stroke', '#dadada')
         .attr('stroke-width', 2);
 
     const borderBottom = borderGroup
         .append('line')
-        .attr('x1', circlePos.x)
-        .attr('x2', circlePos.x)
-        .attr('y1', rectPos.y + rectPos.height)
-        .attr('y2', rectPos.y + rectPos.height)
+        .attr('x1', pxToRem(circlePos.x))
+        .attr('x2', pxToRem(circlePos.x))
+        .attr('y1', pxToRem(rectPos.y + rectPos.height))
+        .attr('y2', pxToRem(rectPos.y + rectPos.height))
         .attr('stroke', '#dadada')
         .attr('stroke-width', 2);
 
     const borderRight = borderGroup
         .append('line')
-        .attr('x1', rectPos.x + rectPos.width)
-        .attr('y1', rectPos.y)
-        .attr('x2', rectPos.x + rectPos.width)
-        .attr('y2', rectPos.y)
+        .attr('x1', pxToRem(rectPos.x + rectPos.width))
+        .attr('y1', pxToRem(rectPos.y))
+        .attr('x2', pxToRem(rectPos.x + rectPos.width))
+        .attr('y2', pxToRem(rectPos.y))
         .attr('stroke', '#dadada')
         .attr('stroke-width', 2);
 
@@ -79,31 +78,31 @@ export function animateBlockHover(currentRect, svgContainer, circle, circleYPos,
         .to(circle.node(), {
             duration: 0.5,
             attr: {
-                'cy': rectPos.y
+                'cy': pxToRem(rectPos.y)
             }
         })
         .to(secondCircle.node(), {
             duration: 0.5,
             attr: {
-                'cy': rectPos.y + rectPos.height
+                'cy': pxToRem(rectPos.y + rectPos.height)
             }
         }, '<')
         .to(borderTopNode, {
             duration: 0.5,
             attr: {
-                'x2': rectPos.x + rectPos.width
+                'x2': pxToRem(rectPos.x + rectPos.width)
             }
         })
         .to(borderBottomNode, {
             duration: 0.5,
             attr: {
-                'x2': rectPos.x + rectPos.width
+                'x2': pxToRem(rectPos.x + rectPos.width)
             }
         }, '<')
         .to(borderRightNode, {
             duration: 0.2,
             attr: {
-                'y2': rectPos.y + rectPos.height
+                'y2': pxToRem(rectPos.y + rectPos.height)
             }
         });
 
@@ -144,10 +143,9 @@ export function makePositionActive(rect, divContainer, nameNode) {
  * @param {SVGGElement} activeGroup 
  * @param {() => void} onAnimationComplete 
  */
-export function showInformationContainer(activeGroup, onAnimationComplete) {
+export function showInformationContainer(activeGroup, isOnLeft, onAnimationComplete) {
     const groupPos = activeGroup.querySelector('rect').getBoundingClientRect();
     const borderContainer = document.querySelector('#experience__section .border__container');
-    const isOnLeft = groupPos.x > (window.innerWidth / 2) ? false : true;
 
     const rect = document.createElement('div');
     rect.setAttribute('id', 'position-content-container')
@@ -155,10 +153,10 @@ export function showInformationContainer(activeGroup, onAnimationComplete) {
     borderContainer.append(rect);
 
     let style = {
-        top: `${groupPos.top - 182}px`,
-        left: `${groupPos.left - 52}px`,
-        width: `${groupPos.width + 30}px`,
-        height: `${groupPos.height}px`
+        top: groupPos.top - 182,
+        left: groupPos.left - 52,
+        width: groupPos.width + 30,
+        height: groupPos.height
     };
 
     const tm = gsap.timeline();
@@ -172,7 +170,7 @@ export function showInformationContainer(activeGroup, onAnimationComplete) {
                 left: 'inherit',
                 right: '0%',
                 top: '5%',
-                width: style.width,
+                width: pxToRem(style.width),
             },
             {
                 duration: 1,
@@ -186,8 +184,8 @@ export function showInformationContainer(activeGroup, onAnimationComplete) {
             {
                 duration: 0,
                 top: '5%',
-                left: '5%',
-                width: style.width,
+                left: '4%',
+                width: pxToRem(style.width),
                 height: 0,
             },
             {
@@ -216,8 +214,9 @@ export function showInformationContainer(activeGroup, onAnimationComplete) {
   *  };
   * }} data 
   * @param {string} companyName
+  * @param {boolean} isOnLeft
  */
-export function displayPositionInformation(data, companyName) {
+export function displayPositionInformation(data, companyName, isOnLeft) {
     /**
     * @type {HTMLTemplateElement}
     */
@@ -228,7 +227,6 @@ export function displayPositionInformation(data, companyName) {
     const companyDescriptionClone = companyDescription.cloneNode(true);
     const position = template.querySelector(`[data-id="${data.name}-${companyName}"]`);
     const positionClone = position.cloneNode(true);
-    const isOnLeft = contentContainerRectData.x > (window.innerWidth / 2) ? false : true;
 
     companyDescriptionClone.style.padding = ('1rem 2rem 1rem 2rem');
     positionClone.style.padding = ('1rem 2rem 1rem 2rem')
@@ -236,33 +234,33 @@ export function displayPositionInformation(data, companyName) {
     contentContainer.append(positionClone);
 
     gsap.from('#position-content-container .c_name', {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 1
     });
 
     gsap.from('#position-content-container .c_description', {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 2,
         delay: 0.2
     });
 
     gsap.from('#position-content-container .p_name', {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 1
     });
 
     gsap.from('#position-content-container .p_description', {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 2,
         delay: 0.2
     });
 
     gsap.from('#position-content-container .p_responsibilities', {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 1.5
     });
@@ -274,7 +272,7 @@ export function displayPositionInformation(data, companyName) {
     allLi.forEach((x, i) => {
         tmAllLi.from(x, {
             opacity: 0,
-            x: isOnLeft ? -2000 : 2000,
+            x: isOnLeft ? pxToRem(-2000) : pxToRem(2000),
             duration: 1
         }, "-=0.5")
     });
@@ -284,7 +282,7 @@ export function displayPositionInformation(data, companyName) {
 
 
     gsap.from(tehStack, {
-        x: isOnLeft ? -1000 : 2000,
+        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
         opacity: 0,
         duration: 1.5
     })
@@ -297,7 +295,7 @@ export function displayPositionInformation(data, companyName) {
             tmTehSpan.from(x, {
                 opacity: 0,
                 //delay: 0.2,
-                x: isOnLeft ? - 2000 : 2000,
+                x: isOnLeft ? pxToRem(- 2000) : pxToRem(2000),
                 duration: 0.8
             }, "-=0.5")
         })
@@ -306,7 +304,7 @@ export function displayPositionInformation(data, companyName) {
             tmTehSpan.from(x, {
                 opacity: 0,
                 // delay: 0.2,
-                x: isOnLeft ? -2000 : 2000,
+                x: isOnLeft ? pxToRem(-2000) : pxToRem(2000),
                 duration: 0.8
             }, "-=0.5")
         });
@@ -321,8 +319,9 @@ export function displayPositionInformation(data, companyName) {
  */
 export function showCloseIcon(activeGroup, onClick) {
     const posData = activeGroup.querySelector('rect').getBBox();
+    console.log(posData);
     const crossXGroup = createSvg('g')
-        .attr('transform', `translate(${posData.width + posData.x - 25},${posData.y + 10})`)
+        .attr('style', `transform: translate(${pxToRem(posData.width + posData.x - 25)},${pxToRem(posData.y + 10)})`)
         .attr('class', 'cross-group')
         .elem;
 
@@ -330,12 +329,12 @@ export function showCloseIcon(activeGroup, onClick) {
 
     const crossStartPosition = 7.5;
     const lineLeft = createSvg('line')
-        .attr('x1', crossStartPosition)
-        .attr('x2', crossStartPosition)
-        .attr('y1', crossStartPosition)
-        .attr('y2', crossStartPosition)
+        .attr('x1', pxToRem(crossStartPosition))
+        .attr('x2', pxToRem(crossStartPosition))
+        .attr('y1', pxToRem(crossStartPosition))
+        .attr('y2', pxToRem(crossStartPosition))
         .attr('stroke', "#fff")
-        .attr('stroke-width', 2)
+        .attr('stroke-width', pxToRem(2))
         .attr('class', 'cross-line')
         .elem;
 
@@ -343,10 +342,10 @@ export function showCloseIcon(activeGroup, onClick) {
     lineLeft.setAttribute('transform', 'rotate(90)');
 
     const pointerRect = createSvg('rect')
-        .attr('x', (15 - 25) / 2)
-        .attr('y', (15 - 25) / 2)
-        .attr('width', 25)
-        .attr('height', 25)
+        .attr('x', pxToRem((15 - 25) / 2))
+        .attr('y', pxToRem((15 - 25) / 2))
+        .attr('width', pxToRem(25))
+        .attr('height', pxToRem(25))
         .attr('fill', 'transparent')
         .elem;
 
@@ -359,20 +358,20 @@ export function showCloseIcon(activeGroup, onClick) {
     let leftAnim = crossTimeLine.to(lineLeft, {
         duration: 1,
         attr: {
-            'x1': 0,
-            'x2': 15,
-            'y1': 0,
-            'y2': 15
+            'x1': pxToRem(0),
+            'x2': pxToRem(15),
+            'y1': pxToRem(0),
+            'y2': pxToRem(15)
         }
     });
 
     let rightAnim = crossTimeLine.to(lineRight, {
         duration: 1,
         attr: {
-            'x1': 0,
-            'x2': 15,
-            'y1': 0,
-            'y2': 15
+            'x1': pxToRem(0),
+            'x2': pxToRem(15),
+            'y1': pxToRem(0),
+            'y2': pxToRem(15)
         }
     }, '<');
 
@@ -413,10 +412,10 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
     const positionsArr = data.positions.map(x => x);
     const { width, height } = svgContainer.node().getBoundingClientRect();
 
-
+    console.log(height);
     const linePosition = {
-        x1: 100,
-        y1: 100,
+        x1: 6,
+        y1: 6,
         y2: height - 10
     }
 
@@ -424,17 +423,17 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .attr('transform', `translate(${'1'}, ${'1'})`);
 
     const line = lineG.append('line')
-        .attr('x1', linePosition.x1)
-        .attr('y1', linePosition.y1)
-        .attr('x2', linePosition.x1)
-        .attr('y2', linePosition.y2)
+        .attr('x1', toRemStr(linePosition.x1))
+        .attr('y1', toRemStr(linePosition.y1))
+        .attr('x2', toRemStr(linePosition.x1))
+        .attr('y2', pxToRem(linePosition.y2))
         .attr('stroke', '#fff')
         .attr('stroke-width', '0.2rem');
 
     const mainCircle = lineG.append('circle')
-        .attr('cx', linePosition.x1)
-        .attr('cy', linePosition.y1)
-        .attr('r', mainCircleSizeR)
+        .attr('cx', toRemStr(linePosition.x1))
+        .attr('cy', toRemStr(linePosition.y1))
+        .attr('r', pxToRem(mainCircleSizeR))
         .attr('fill', '#dadada');
 
     const circlesStep = Math.floor((linePosition.y2 + 50) / 4);
@@ -445,13 +444,13 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .data(positionsArr)
         .enter()
         .append('circle')
-        .attr('r', mainCircleSizeR / 2)
-        .attr('cx', linePosition.x1)
+        .attr('r', pxToRem(mainCircleSizeR / 2))
+        .attr('cx', toRemStr(linePosition.x1))
         .attr('cy', (d, i) => {
             const yPosition = circlesStep * (i + 1);
 
             subCirclesPositions.push(yPosition)
-            return yPosition;
+            return pxToRem(yPosition);
         })
         .attr('fill', '#dadada');
 
@@ -460,12 +459,12 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .attr('class', 'company_title_g')
         .append('text')
         .attr('class', 'company_title')
-        .attr('x', linePosition.x1 + 50)
+        .attr('x', toRemStr(linePosition.x1 + 3.125))
         .text(data.company)
 
         .attr('y', function () {
             const { height } = this.getBoundingClientRect();
-            return linePosition.y1 + height / 4;
+            return pxToRem(remToPx(linePosition.y1) + height / 4);
         });
 
 
@@ -481,21 +480,21 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .attr('id', d => `${d.name}-${data.company}`)
         .append('text')
         .attr('class', 'position_title')
-        .attr('x', linePosition.x1 + 50)
+        .attr('x', toRemStr(linePosition.x1 + 3.125))
         .text(d => d.name)
         .attr('y', function (d, i) {
             const { height } = this.getBoundingClientRect();
             d.mainTextY = subCirclesPositions[i] + height / 4;
-            return d.mainTextY;
+            return pxToRem(d.mainTextY);
         });
 
     subItemsG.append('foreignObject')
         .attr('class', 'desc-text')
-        .attr('x', linePosition.x1 + 50)
+        .attr('x', toRemStr(linePosition.x1 + 3.125))
         .attr('y', function (d, i) {
-            return subCirclesPositions[i] + 25;
+            return pxToRem(subCirclesPositions[i] + 25);
         })
-        .attr('width', width - linePosition.x1 - 50)
+        .attr('width', pxToRem(width))
 
         .html((d) => `<div>${d.shortDescription}</div>`);
 
@@ -503,7 +502,8 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         const div = g[index].querySelector('div');
         const divSize = div.getBoundingClientRect();
         const foreignObject = g[index].querySelector('foreignObject');
-        foreignObject.setAttribute('height', divSize.height);
+        foreignObject.setAttribute('height', pxToRem(divSize.height));
+        foreignObject.setAttribute('width', '80%');
     });
 
 
@@ -522,15 +522,15 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         const { x, y, height } = this.getBBox();
         const circleOldPos = subCirclesPositions[positionData.pos];
         const circle = subCircles.filter((f, i) => i === positionData.pos);
-        const lineX1 = line.attr('x1');
+        const lineX1 = remToPx(line.attr('x1'));
 
 
 
         const rect = createSvg('rect')
-            .attr('x', lineX1)
-            .attr('y', y - 30)
-            .attr('width', width - lineX1 - 2)
-            .attr('height', height + 60)
+            .attr('x', pxToRem(lineX1))
+            .attr('y', pxToRem(y, -1))
+            .attr('width', pxToRem(width - lineX1 - 2))
+            .attr('height', pxToRem(height, 3))
             .elem;
 
         rect.classList.add('hover-rect');
@@ -575,7 +575,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
             currentSelectedElemId = id;
 
             evMap.set(id, { ...evMap.get(id), shouldStopReverseAnimation: true });
-            let positionInformationTm = showInformationContainer(this, () => displayPositionInformation(positionData, data.company));
+            let positionInformationTm = showInformationContainer(this, data.onLeft, () => displayPositionInformation(positionData, data.company, data.onLeft));
             let rectangleActiveTml = makePositionActive(rect, divContainer, nameNode);
 
 
@@ -664,8 +664,8 @@ export function removePositionData(event) {
  */
 export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRectangles) {
     const lineNode = line.node();
-    const lineY2 = +line.attr('y2');
-    const circleCy = +circleBig.attr('cy');
+    const lineY2 = remToPx(line.attr('y2'));
+    const circleCy = remToPx(circleBig.attr('cy'));
     const circleBigNode = circleBig.node();
     const circleSmallNode = circlesSmall.node();
     const leftRectsNode = leftRectangles.node();
@@ -676,13 +676,13 @@ export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRec
     tm.from(lineNode, {
         duration: 0.5,
         attr: {
-            y1: lineY2,
+            y1: pxToRem(lineY2),
         },
     });
 
     tm.from(circleBigNode, {
         attr: {
-            cy: lineY2,
+            cy: pxToRem(lineY2),
         },
         r: 0
     })
@@ -694,7 +694,7 @@ export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRec
             .from(this, {
                 duration: 0.5,
                 attr: {
-                    cy: lineY2,
+                    cy: pxToRem(lineY2),
                     r: 0,
                 },
             }, `-=0.3`)
@@ -704,31 +704,7 @@ export function animateAllPageOnFirstLoad(line, circleBig, circlesSmall, leftRec
         tm.from(this, {
             delay: 0.5,
             duration: 1,
-            y: lineY2,
+            y: pxToRem(lineY2),
         }, `test_${i}-=0.2`);
     })
 }
-
-
-
-// /**
-//  *
-//  * @param {*} circle
-//  */
-// export function makerCircleActive(nodeGroup) {
-//     const realCircleNode = nodeGroup.querySelector('circle');
-
-//     const realCirclePosition = realCircleNode.getBoundingClientRect();
-//     console.log(realCirclePosition);
-//     const circle = createSvg('circle')
-//         .attr('class', 'active-circle')
-//         .attr('stroke-width', 2)
-//         .attr('stroke', '#dadada')
-//         .attr('fill', 'transparent')
-//         // .attr('cy', realCirclePosition.cy)
-//         // .attr('cx', realCirclePosition.cx)
-//         .attr('r', realCirclePosition.width / 2)
-//         .elem;
-
-//     nodeGroup.append(circle);
-// }

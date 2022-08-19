@@ -8,9 +8,9 @@ export const projects__section = document.querySelector('#projects__section');
 
 //#region  navigation selectors
 export const navItems = document.querySelectorAll('.nav_item');
-export const svg_container = document.querySelector('.nav_border');
-export const topBorder = svg_container.querySelector('.top');
-export const bottomBorder = svg_container.querySelector('.bottom');
+//export const svg_container = document.querySelector('.nav_border');
+//export const topBorder = svg_container.querySelector('.top');
+//export const bottomBorder = svg_container.querySelector('.bottom');
 //#endregion
 
 

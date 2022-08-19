@@ -6,6 +6,8 @@ nav {
   .logo {
     font-weight: bold;
     z-index: 10;
+    font-family: 'Norse';
+    font-size: 1.3rem;
   }
   ul {
     z-index: 10;
@@ -18,6 +20,90 @@ nav {
     li {
       margin-right: 4rem;
       cursor: pointer;
+      font-family: 'Norse';
+      font-weight: bold;
+      font-size: 1.3rem;
+      position: relative;
+      width: 4.063rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    li.nav_item--active {
+      .border_top {
+        &::before {
+          content: '';
+          position: absolute;
+          border-left: 0.17rem solid white;
+          left: -2rem;
+          top: 0.3rem;
+          animation: animate-line-left-vert 0.5s forwards linear;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          border-bottom: 0.17rem solid white;
+
+          left: -2rem;
+          bottom: -0.5rem;
+          animation: animate-line-left-horizon 1s forwards ease-in;
+          animation-delay: 0.5s;
+        }
+      }
+
+      .border_bottom {
+        &::before {
+          content: '';
+          position: absolute;
+
+          border-right: 0.17rem solid rgb(234, 234, 106);
+          right: -2rem;
+          bottom: 0.25rem;
+          animation: animate-line-right-vert 0.5s forwards linear;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          border-bottom: 0.17rem solid rgb(234, 234, 106);
+
+          right: -2rem;
+          top: -0.5rem;
+          animation: animate-line-left-horizon 1s forwards ease-in;
+          animation-delay: 0.5s;
+        }
+      }
+    }
+
+    @keyframes animate-line-left-vert {
+      0% {
+        height: 0rem;
+      }
+
+      100% {
+        height: 1.5rem;
+      }
+    }
+
+    @keyframes animate-line-right-vert {
+      0% {
+        height: 0rem;
+      }
+
+      100% {
+        height: 1.5rem;
+      }
+    }
+
+    @keyframes animate-line-left-horizon {
+      0% {
+        width: 0rem;
+      }
+
+      100% {
+        width: 8rem;
+      }
     }
   }
 

@@ -30,6 +30,13 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: 'Norse';
+  src: url('../asset/fonts/norse.regular.otf');
+  font-style: normal;
+  font-weight: 400;
+}
+
 body {
   background: linear-gradient(270deg, #424242, #211b35);
   color: #dadada;
@@ -83,5 +90,23 @@ body {
 
   .links_to_tree {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 2048px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1920px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  html {
+    font-size: 10px;
   }
 }

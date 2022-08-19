@@ -240,7 +240,7 @@ export function rPosition(value, attr) {
         const currentElem = this;
 
         const rect = currentElem.getBoundingClientRect();
-        console.log(rect);
+
         return (rect[attr] + value);
     }
 
@@ -267,4 +267,50 @@ export const createSvg = (name) => {
             return this;
         }
     })
+}
+
+
+let mainFontSize = 16;
+export function pxToRem(px, additionalRem, convert) {
+
+    if (convert) {
+        return (px / mainFontSize);
+    }
+    return `${(px / mainFontSize) + (additionalRem || 0)}rem`;
+}
+
+export function remToPx(rem) {
+    return Number.parseFloat(rem) * mainFontSize;
+}
+
+export function setMainFontSize(size) {
+    mainFontSize = size;
+}
+
+export function getMainFontSize() {
+    return mainFontSize;
+}
+
+export function toRemStr(val) {
+    return `${val}rem`;
+}
+
+
+
+/**
+ * 
+ * @param {():void} cb 
+ * @param {number} time 
+ */
+export function throttle(cb, time) {
+    let timeoutId;
+    return () => {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+            cb();
+        }, time);
+
+
+    }
 }

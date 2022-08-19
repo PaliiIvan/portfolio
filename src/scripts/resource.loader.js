@@ -2,7 +2,9 @@ export const Resources = {
     yggdrasil: 'yggdrasil',
     anvil_page_icon: 'anvil_page_icon',
     sword_border: 'sword_border',
-    about_icon: 'about_icon'
+    about_icon: 'about_icon',
+    linkedIn: 'linkedIn',
+    mail_icon: 'mail_icon',
 }
 
 const resourcesList = [
@@ -10,6 +12,8 @@ const resourcesList = [
     { name: Resources.anvil_page_icon, loader: () => import('../asset/icons/anvil_page_icon.m.svg') },
     { name: Resources.sword_border, loader: () => import('../asset/icons/sword_border.m.svg') },
     { name: Resources.about_icon, loader: () => import('../asset/icons/about_icon.m.svg') },
+    { name: Resources.linkedIn, loader: () => import('../asset/icons/linkedIn.m.svg') },
+    { name: Resources.mail_icon, loader: () => import('../asset/icons/mail.m.svg') },
 ]
 
 

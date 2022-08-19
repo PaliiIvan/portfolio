@@ -1,19 +1,24 @@
 import { EXPERIENCE, PAGES } from "../constants";
-import { createSvg, rPosition, showPage } from "../helpers";
-import { sections } from "../selection";
+import { createSvg, pxToRem, rPosition, showPage, throttle } from "../helpers";
+import { experience__section, sections } from "../selection";
 import "./experience.scss";
 import * as d3 from "d3";
+import gsap from "gsap";
 import { addContentToCards, addEventListenersToCards, animateAllPageOnFirstLoad, animateBlockHover, displayPositionInformation, drawMainComponents, makePositionActive, onCloseClick, resetBorder, showCloseIcon, showInformationContainer } from "./experience.utils";
 
 
 
-let isPageCreated = false;
+
 export function init(resources) {
-    if (!isPageCreated) {
-        showPage(PAGES.EXPERIENCE);
-        EXPERIENCE.forEach(exp => drawSvg(exp))
-        isPageCreated = true;
-    }
+    const mainSvgContainers = experience__section.querySelectorAll('.main_c_svg');
+    gsap.to(mainSvgContainers, {
+        onComplete() {
+            mainSvgContainers.forEach(x => x.innerHTML = '')
+            EXPERIENCE.forEach(exp => drawSvg(exp));
+            onResizeChange();
+        },
+        duration: 0.1
+    });
 }
 
 /**
@@ -51,5 +56,25 @@ function drawSvg(data) {
     animateAllPageOnFirstLoad(line, mainCircle, subCircles, subItemsG);
 }
 
+function onResizeChange() {
+    const reRenderFn = throttle(() => {
+        const mainSvgContainers = experience__section.querySelectorAll('.main_c_svg');
+        gsap.to(mainSvgContainers, {
+            opacity: 0,
+            onComplete() {
+                mainSvgContainers.forEach(x => x.innerHTML = '')
+                EXPERIENCE.forEach(exp => drawSvg(exp));
+                gsap.to(mainSvgContainers, { opacity: 1 });
+            },
+            duration: 0.1
+        });
+
+    }, 100)
+
+
+    window.addEventListener('resize', () => {
+        reRenderFn();
+    })
+}
 
 export const Experience = { init };

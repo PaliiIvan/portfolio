@@ -1,7 +1,8 @@
 import * as D3 from "d3";
 import { index, transition } from "d3";
 import gsap from "gsap";
-import { createSvg } from "../helpers";
+import { createSvg, pxToRem, remToPx } from "../helpers";
+import { SkillsDataOptions } from "./skills";
 
 /**
  *
@@ -10,12 +11,12 @@ import { createSvg } from "../helpers";
  * @returns {D3.Transition<HTMLElement, any, null, undefined>}
  */
 export function animateBuildingBlocks(nodes, height, onEndCallback) {
-  const nodesBig = nodes.filter((data) => data.width === 250);
-  const nodesMid = nodes.filter((data) => data.height == 120);
+  const nodesBig = nodes.filter((data) => data.width === SkillsDataOptions.TOP.width);
+  const nodesMid = nodes.filter((data) => data.width == SkillsDataOptions.MIDDLE.width);
   const buildingTransition = D3.transition("tr").duration(1000);
 
-  const maxInColBig = height / 250;
-  const maxInColSmall = height / 120;
+  const maxInColBig = 3;
+  const maxInColSmall = 6;
 
   const coordBig = [];
   const coordSmall = [];
@@ -23,13 +24,24 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
 
   loop: for (
     let xIteration = 0;
-    xIteration < Math.ceil(nodesBig.size() / maxInColBig);
+    xIteration < 2;
     xIteration++
   ) {
-    for (let yIteration = 0; yIteration < maxInColBig - 1; yIteration++) {
+    for (let yIteration = 0; yIteration < maxInColBig; yIteration++) {
+
+
+      const startPositionY = SkillsDataOptions.TOP.r;
+      const stepOnY = yIteration * SkillsDataOptions.TOP.width;
+
+      const startPositionX = SkillsDataOptions.TOP.r;
+      const stepOnX = xIteration * SkillsDataOptions.TOP.width;
+      const margin = 1;
+
+
+
       const recPosition = {
-        x: xIteration * 260 + 10 + 125,
-        y: yIteration * 260 + 10 + 125,
+        y: startPositionY + stepOnY + margin + (yIteration * 1.5), //+ pxToRem(10, 0, true) + pxToRem(125, 0, true),
+        x: startPositionX + stepOnX + margin + (xIteration * 1.5)//+ pxToRem(10, 0, true) + pxToRem(125, 0, true),
       };
       coordBig.push(recPosition);
 
@@ -41,23 +53,29 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
 
   iterator = 0;
   const lastPosition = coordBig.at(-1);
-  console.log(lastPosition);
+
   loop: for (
     let xIteration = 0;
-    xIteration < Math.ceil(nodesMid.size() / maxInColSmall) * 2;
+    xIteration < 2;
     xIteration++
   ) {
-    for (let yIteration = 0; yIteration < maxInColSmall - 1; yIteration++) {
+    for (let yIteration = 0; yIteration < maxInColSmall; yIteration++) {
+
+      const marginY = lastPosition.y + SkillsDataOptions.TOP.r + SkillsDataOptions.MIDDLE.r + 1;
+      const stepOnY = yIteration * SkillsDataOptions.MIDDLE.width;
+      const gapOnY = yIteration * 1;
+
+      const marginOnX = lastPosition.x - SkillsDataOptions.TOP.r + SkillsDataOptions.MIDDLE.r;
+
       const recPosition1 = {
-        x: lastPosition.x + xIteration * 130 - 60,
-        y: lastPosition.y + 250 + yIteration * 130 + 10 - 60,
-        r: 60
+        x: marginOnX, //+ SkillsDataOptions.TOP.r + SkillsDataOptions.MIDDLE.r,
+        y: marginY + gapOnY + stepOnY
       };
       const recPosition2 = {
-        x: lastPosition.x + (xIteration + 1) * 130 - 60,
-        y: lastPosition.y + 250 + yIteration * 130 + 10 - 60,
-        r: 60
+        x: marginOnX + SkillsDataOptions.MIDDLE.width + 0.5, //+ SkillsDataOptions.TOP.r + SkillsDataOptions.MIDDLE.r,
+        y: marginY + gapOnY + stepOnY
       };
+
       coordSmall.push(recPosition1);
       coordSmall.push(recPosition2);
 
@@ -70,7 +88,7 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
     .transition(buildingTransition)
     .attr(
       "transform",
-      (d, i) => `translate(${coordBig[i].x}, ${coordBig[i].y})`
+      (d, i) => `translate(${remToPx(coordBig[i].x)}, ${remToPx(coordBig[i].y)})`
     )
     .each((dat, i) => {
       (dat.tx = coordBig[i].x), (dat.ty = coordBig[i].y);
@@ -90,7 +108,7 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
     .transition(buildingTransition)
     .attr(
       "transform",
-      (d, i) => `translate(${coordSmall[i].x}, ${coordSmall[i].y})`
+      (d, i) => `translate(${remToPx(coordSmall[i].x)}, ${remToPx(coordSmall[i].y)})`
     )
     .each((dat, i) => {
       (dat.tx = coordSmall[i].x), (dat.ty = coordSmall[i].y);
@@ -220,6 +238,7 @@ export function openSkillDescription(selectedNode, svg, nodes, onAnimationEnd) {
   const datArr = nodes.data();
 
   datArr.forEach(data => {
+
     if (data.tx > maxVal.xPos) {
       maxVal.xPos = data.tx + data.r;
       maxVal.r = data.r;
@@ -237,7 +256,9 @@ export function openSkillDescription(selectedNode, svg, nodes, onAnimationEnd) {
 
   const { tx, ty, width, name } = D3.select(selectedNode).datum();
 
-  const descriptionPosition = { x: maxVal.xPos + maxVal.r, y: 10 };
+  const descriptionPosition = { x: remToPx(maxVal.xPos + maxVal.r), y: 10 };
+  console.log(descriptionPosition);
+
   const { width: svgWidth, height: svgHeight } = svg
     .node()
     .getBoundingClientRect();
@@ -249,10 +270,11 @@ export function openSkillDescription(selectedNode, svg, nodes, onAnimationEnd) {
     .attr("class", "skill-description")
     .attr("fill", "#dadada")
     .attr("stroke", "white")
-    .attr("rx", emptyWidth / 2)
-    .attr("ry", emptyHeight / 2)
-    .attr("x", emptyWidth / 2 + descriptionPosition.x)
-    .attr("y", emptyHeight / 2).elem;
+    .attr("rx", pxToRem(emptyWidth / 2))
+    .attr("ry", pxToRem(emptyHeight / 2))
+    .attr("x", (svgWidth + descriptionPosition.x) / 2)
+    .attr("y", emptyHeight / 2)
+    .elem;
 
   groupForRect.node().append(backRectangle);
 
@@ -269,8 +291,8 @@ export function openSkillDescription(selectedNode, svg, nodes, onAnimationEnd) {
   }).to(backRectangle, {
     duration: 0.5,
     attr: {
-      rx: '15px',
-      ry: '15px',
+      rx: pxToRem(15),
+      ry: pxToRem(15),
       width: emptyWidth - 2,
       height: emptyHeight,
       x: descriptionPosition.x,

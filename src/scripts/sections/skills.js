@@ -1,30 +1,30 @@
-import { sections } from "../selection";
+import { skills_section } from "../selection";
 import * as D3 from "d3";
-import { calculateMiddleValue, rectCollide, initiateDrugEvents, showPage } from "../helpers";
+import { initiateDrugEvents, showPage, toRemStr, remToPx, throttle } from "../helpers";
 import "./skills.scss";
-import { line, thresholdScott } from "d3";
+
 import { addGradient, animateBuildingBlocks, closeSkillDescription, createCrossIcon, deselectSkill, openSkillDescription } from "./skills.utils";
 import { PAGES } from "../constants";
-import { makerCircleActive } from "./experience.utils";
+import gsap from "gsap";
 
-const SkillsDataOptions = {
+export const SkillsDataOptions = {
     TOP: {
         class: "skill_lvl_1",
-        width: 250,
-        height: 250,
-        r: 125
+        width: 15,
+        height: 15,
+        r: 7.5
     },
     MIDDLE: {
         class: "skill_lvl_2",
-        width: 120,
-        height: 120,
-        r: 60
+        width: 6.875,
+        height: 6.875,
+        r: 3.4375
     },
     LOW: {
         class: "skill_lvl_3",
-        width: 74,
-        height: 74,
-        r: 30
+        width: 4.625,
+        height: 4.625,
+        r: 1.875
     },
 };
 
@@ -77,8 +77,8 @@ let isBuilded = false;
 
 export function init(resources) {
     showPage(PAGES.SKILLS);
-
     createSvg();
+    onResizeChange();
 
 
     //main__draw__container
@@ -103,8 +103,8 @@ export function init(resources) {
             .enter()
             .append('g')
             .attr("class", (d) => d.class)
-            .attr("width", (d) => d.width)
-            .attr("height", (d) => d.height)
+            .attr("width", (d) => toRemStr(d.width))
+            .attr("height", (d) => toRemStr(d.height))
             .attr('transform', d => `translate(${d.x}, ${d.y})`)
             .on('mouseover', function (ev) {
                 this.classList.add('hover');
@@ -123,10 +123,7 @@ export function init(resources) {
 
 
         const rects = nodes.append("circle")
-            //.attr('opacity', 0)
-            // .attr("width", (d) => d.width)
-            // .attr("height", (d) => d.height)
-            .attr('r', d => d.r)
+            .attr('r', d => toRemStr(d.r))
             .attr('fill', "url('#skill_gradient')")
 
 
@@ -134,17 +131,9 @@ export function init(resources) {
 
         const textNodes = nodes
             .append('text')
-            // .attr('opacity', 0)
             .attr('x', d => d.cx)
             .attr('y', d => d.cy)
             .text(d => d.name);
-
-        var collisionForce = rectCollide()
-            .size(function (d) { return [d.width, d.width] }).pending(20);
-
-
-        const opacityInterpolate = D3.interpolate(1.01, -1);
-
 
         simulation = D3.forceSimulation(data)
             //Disable x y simulation on drag
@@ -152,7 +141,7 @@ export function init(resources) {
             .force("x", D3.forceX(width / 2).strength(0.005))
             .force("y", D3.forceY(height / 2).strength(0.005))
             .force("charge", D3.forceManyBody().strength(-10))
-            .force("collide", D3.forceCollide().radius(d => d.r + 5))
+            .force("collide", D3.forceCollide().radius(d => remToPx(d.r) + 2))
             .on("tick", function () {
 
                 nodes.attr('transform', function (d) {
@@ -190,7 +179,29 @@ export function init(resources) {
             }
         }
     }
+
+    function onResizeChange() {
+        const reRenderFn = throttle(() => {
+            const mainSvgContainer = skills_section.querySelector('.main__draw__container');
+            gsap.to(mainSvgContainer, {
+                opacity: 0,
+                onComplete() {
+                    mainSvgContainer.remove();
+                    createSvg();
+                },
+                duration: 0.1
+            });
+
+        }, 100)
+
+
+        window.addEventListener('resize', () => {
+            reRenderFn();
+        })
+    }
 }
+
+
 
 
 

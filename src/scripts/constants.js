@@ -21,6 +21,7 @@ export const PAGESStr = {
 export const EXPERIENCE = [
     {
         company: 'Pentalog',
+        onLeft: true,
         positions: [
             {
                 name: 'Front-End Developer',
@@ -33,6 +34,7 @@ export const EXPERIENCE = [
     },
     {
         company: 'Amdaris',
+        onLeft: false,
         positions: [
             {
                 name: 'Front-End Developer',

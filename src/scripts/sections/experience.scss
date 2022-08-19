@@ -32,17 +32,17 @@
     font-size: 1.5rem;
     fill: #dadada;
 
-    @media only screen and (max-width: 1920px) {
-      font-size: 1.3rem;
-    }
+    // @media only screen and (max-width: 1920px) {
+    //   font-size: 1.3rem;
+    // }
   }
 
   .desc-text {
     color: #dadada;
     font-size: 1rem;
-    @media only screen and (max-width: 1920px) {
-      font-size: 0.8rem;
-    }
+    // @media only screen and (max-width: 1920px) {
+    //   font-size: 0.8rem;
+    // }
   }
 
   .hover-rect {
@@ -54,6 +54,9 @@
     }
     foreignObject {
       pointer-events: none;
+      div {
+        width: 95%;
+      }
     }
   }
 
@@ -66,47 +69,47 @@
         font-size: 2rem;
         padding-bottom: 1rem;
         font-weight: bold;
-        @media only screen and (max-width: 1920px) {
-          font-size: 1.9rem;
-        }
+        // @media only screen and (max-width: 1920px) {
+        //   font-size: 1.9rem;
+        // }
       }
       .c_description {
         font-size: 0.9rem;
-        @media only screen and (max-width: 1920px) {
-          font-size: 0.8rem;
-        }
+        // @media only screen and (max-width: 1920px) {
+        //   font-size: 0.8rem;
+        // }
       }
     }
     .p_name {
       font-size: 2rem;
       padding-bottom: 1rem;
       font-weight: bold;
-      @media only screen and (max-width: 1920px) {
-        font-size: 1.9rem;
-      }
+      // @media only screen and (max-width: 1920px) {
+      //   font-size: 1.9rem;
+      // }
     }
 
     .p_description {
       font-size: 0.9rem;
-      @media only screen and (max-width: 1920px) {
-        font-size: 0.8rem;
-      }
+      // @media only screen and (max-width: 1920px) {
+      //   font-size: 0.8rem;
+      // }
     }
 
     .p_responsibilities {
       margin-top: 1.5rem;
       font-size: 1rem;
       font-weight: bold;
-      @media only screen and (max-width: 1920px) {
-        font-size: 0.9rem;
-      }
+      // @media only screen and (max-width: 1920px) {
+      //   font-size: 0.9rem;
+      // }
     }
 
-    ul {
-      @media only screen and (max-width: 1920px) {
-        font-size: 0.9rem;
-      }
-    }
+    // ul {
+    //   @media only screen and (max-width: 1920px) {
+    //     font-size: 0.9rem;
+    //   }
+    // }
 
     .teh-stack-container {
       margin-top: 2rem;
@@ -116,9 +119,9 @@
         display: flex;
         gap: 0.5rem;
       }
-      @media only screen and (max-width: 1920px) {
-        font-size: 0.9rem;
-      }
+      // @media only screen and (max-width: 1920px) {
+      //   font-size: 0.9rem;
+      // }
       .teh-stack {
         font-weight: bold;
       }
