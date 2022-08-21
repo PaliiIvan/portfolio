@@ -244,6 +244,10 @@ body {
   .pointer {
     cursor: none;
   }
+
+  .bold {
+    font-weight: bold;
+  }
 }
 
 @media only screen and (max-width: 2048px) {
