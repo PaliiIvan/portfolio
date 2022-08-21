@@ -10,13 +10,16 @@ import { addContentToCards, addEventListenersToCards, animateAllPageOnFirstLoad,
 
 
 export function init(resources) {
+    showPage(PAGES.EXPERIENCE);
+
     const mainSvgContainers = experience__section.querySelectorAll('.main_c_svg');
-    gsap.to(mainSvgContainers, {
+    gsap.fromTo(mainSvgContainers, { opacity: 0, duration: 0.1 }, {
         onComplete() {
             mainSvgContainers.forEach(x => x.innerHTML = '')
             EXPERIENCE.forEach(exp => drawSvg(exp));
             onResizeChange();
         },
+        opacity: 1,
         duration: 0.1
     });
 }
@@ -59,13 +62,16 @@ function drawSvg(data) {
 function onResizeChange() {
     const reRenderFn = throttle(() => {
         const mainSvgContainers = experience__section.querySelectorAll('.main_c_svg');
-        gsap.to(mainSvgContainers, {
+
+        gsap.fromTo(mainSvgContainers, {
             opacity: 0,
             onComplete() {
                 mainSvgContainers.forEach(x => x.innerHTML = '')
                 EXPERIENCE.forEach(exp => drawSvg(exp));
-                gsap.to(mainSvgContainers, { opacity: 1 });
             },
+            duration: 0.1
+        }, {
+            opacity: 1,
             duration: 0.1
         });
 

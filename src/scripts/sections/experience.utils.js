@@ -281,30 +281,51 @@ export function displayPositionInformation(data, companyName, isOnLeft) {
     const tehStackUl = document.querySelectorAll('.teh-stack-container span');
 
 
-    gsap.from(tehStack, {
-        x: isOnLeft ? pxToRem(-1000) : pxToRem(2000),
-        opacity: 0,
-        duration: 1.5
-    })
+
+
+    // if (isOnLeft) {
+    //     gsap.from(tehStack, {
+    //         x: pxToRem(-1000),
+    //         opacity: 0,
+    //         duration: 1.5
+    //     })
+    // } else {
+    //     gsap.from(tehStack, {
+    //         x: pxToRem(2000),
+    //         opacity: 0,
+    //         duration: 1.5
+    //     })
+    // }
 
     let tmTehSpan = gsap.timeline();
     if (isOnLeft) {
 
         Array.from(tehStackUl).reverse().forEach((x, i) => {
-
             tmTehSpan.from(x, {
                 opacity: 0,
-                //delay: 0.2,
-                x: isOnLeft ? pxToRem(- 2000) : pxToRem(2000),
+                x: pxToRem(- 2000),
                 duration: 0.8
             }, "-=0.5")
-        })
+        });
+
+        tmTehSpan.from(tehStack, {
+            opacity: 0,
+            x: pxToRem(- 2000),
+            duration: 0.8
+        }, "-=0.5")
+
     } else {
+
+        tmTehSpan.from(tehStack, {
+            opacity: 0,
+            x: pxToRem(2000),
+            duration: 0.8
+        }, "-=0.5")
+
         tehStackUl.forEach((x, i) => {
             tmTehSpan.from(x, {
                 opacity: 0,
-                // delay: 0.2,
-                x: isOnLeft ? pxToRem(-2000) : pxToRem(2000),
+                x: pxToRem(2000),
                 duration: 0.8
             }, "-=0.5")
         });
@@ -319,10 +340,10 @@ export function displayPositionInformation(data, companyName, isOnLeft) {
  */
 export function showCloseIcon(activeGroup, onClick) {
     const posData = activeGroup.querySelector('rect').getBBox();
-    console.log(posData);
+
     const crossXGroup = createSvg('g')
         .attr('style', `transform: translate(${pxToRem(posData.width + posData.x - 25)},${pxToRem(posData.y + 10)})`)
-        .attr('class', 'cross-group')
+        .attr('class', 'cross-group pointer')
         .elem;
 
     const crossTimeLine = gsap.timeline({ onReverseComplete: () => crossXGroup.remove() });
@@ -473,7 +494,7 @@ export function drawMainComponents(data, mainCircleSizeR, svgContainer) {
         .data(positionsArr)
         .enter()
         .append('g')
-        .attr('class', 'position-svg-container');
+        .attr('class', 'position-svg-container pointer');
 
 
     subItemsG

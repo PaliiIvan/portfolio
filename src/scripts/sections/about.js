@@ -9,9 +9,7 @@ import Vivus from "vivus";
 import { showAnimationText } from "./about.utils";
 
 function init(resources) {
-    showPage(PAGES.ABOUT)
-    //const treeIcon = resources[Resources.yggdrasil];
-    console.log('About');
+    showPage(PAGES.ABOUT);
     addIcon();
     showAnimationText(resources);
 }

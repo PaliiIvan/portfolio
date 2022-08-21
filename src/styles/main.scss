@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html {
+  cursor: none;
+  overflow: hidden;
+}
+
 @font-face {
   font-family: 'Nato';
   src: url('../asset/fonts/NotoSans-Regular.ttf');
@@ -90,6 +95,154 @@ body {
 
   .links_to_tree {
     display: none;
+  }
+  #mouse_pointer {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 100%;
+    border: 0.06rem white solid;
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    .hover-animation {
+      pointer-events: none;
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: rgb(97, 208, 236);
+      border-radius: 100%;
+      filter: blur(0.7rem);
+      position: fixed;
+    }
+
+    .hover-animation.hover {
+      animation: hover 1s ease-in-out infinite;
+    }
+
+    $border: 0.05rem solid #dadada;
+
+    .hover-move {
+      opacity: 0;
+    }
+    .hover-move.move {
+      opacity: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        // animation: move 2s ease-in-out infinite;
+      }
+      .top {
+        top: -25%;
+        transform: translate(-50%, -50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #dadada;
+
+        animation: move-top 1s linear infinite alternate;
+      }
+      .left {
+        left: -25%;
+        transform: translate(-50%, -50%);
+        border-bottom: 5px solid transparent;
+        border-top: 5px solid transparent;
+
+        border-right: 5px solid #dadada;
+        animation: move-left 1s linear infinite alternate;
+      }
+
+      .bottom {
+        top: 125%;
+        transform: translate(-50%, -50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+
+        border-top: 5px solid #dadada;
+        animation: move-bottom 1s linear infinite alternate;
+      }
+
+      .right {
+        left: 125%;
+        transform: translate(-50%, -50%);
+        border-bottom: 5px solid transparent;
+        border-top: 5px solid transparent;
+
+        border-left: 5px solid #dadada;
+        animation: move-right 1s linear infinite alternate;
+      }
+    }
+
+    @keyframes hover {
+      0% {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: transparent;
+      }
+      10% {
+        background-color: rgb(97, 208, 236);
+      }
+
+      100% {
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 100%;
+        border: 0.06rem white solid;
+        filter: blur(0rem);
+        background-color: transparent;
+      }
+    }
+
+    @keyframes move-top {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        transform: translate(-50%, -100%);
+      }
+    }
+
+    @keyframes move-right {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        transform: translate(0%, -50%);
+      }
+    }
+
+    @keyframes move-bottom {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        transform: translate(-50%, -0%);
+      }
+    }
+
+    @keyframes move-left {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        transform: translate(-100%, -50%);
+      }
+    }
+  }
+
+  .pointer {
+    cursor: none;
   }
 }
 

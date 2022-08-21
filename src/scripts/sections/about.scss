@@ -41,10 +41,13 @@
         margin-top: auto;
         font-size: 1rem;
         display: flex;
+        a {
+          cursor: none;
+        }
         svg {
           width: 10rem;
           height: 10rem;
-          cursor: pointer;
+
           path {
             transition: 1s fill;
             stroke: #dadada;
@@ -101,7 +104,7 @@
       top: 10%;
       left: 70%;
       border-radius: 50%;
-      animation: circle 3s infinite alternate ease-in-out;
+      animation: circle 10s infinite alternate ease-in-out;
     }
 
     @keyframes circle {
@@ -122,6 +125,16 @@
       left: 71%;
       transform: rotate(129deg);
       border-radius: 15px;
+      animation: rectangle 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes rectangle {
+      from {
+        transform: translate(0rem, 0rem) rotate(129deg);
+      }
+      to {
+        transform: translate(1rem, -1rem) rotate(129deg);
+      }
     }
 
     .three-angle {
@@ -135,6 +148,16 @@
       left: 5%;
       z-index: 0;
       transform: rotate(35deg);
+      animation: three-angle 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes three-angle {
+      from {
+        transform: rotate(35deg);
+      }
+      to {
+        transform: rotate(56deg);
+      }
     }
   }
 }

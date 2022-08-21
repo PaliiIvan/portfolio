@@ -47,3 +47,60 @@ function reCalculateSize() {
         setMainFontSize(10)
     }
 }
+
+/**
+ * @type {HTMLDivElement} pointer
+ */
+const pointer = document.querySelector('#mouse_pointer');
+
+const { width } = pointer.getBoundingClientRect();
+
+window.addEventListener('mousemove', ({ clientX, clientY, target }) => {
+    if (target instanceof SVGElement) {
+        target = target.parentElement;
+    }
+
+    if (target.classList.contains('pointer')) {
+        pointer.querySelector('.hover-animation').classList.add('hover');
+
+        if (target.classList.contains('hover-move')) {
+            pointer.querySelector('.hover-move').classList.add('move');
+        }
+    } else {
+        pointer.querySelector('.hover-animation').classList.remove('hover');
+        pointer.querySelector('.hover-move').classList.remove('move');
+    }
+
+    requestAnimationFrame(() => {
+        pointer.style.top = `${clientY - width / 2}px`;
+        pointer.style.left = `${clientX - width / 2}px`
+    });
+});
+
+window.addEventListener('drag', ({ clientX, clientY, target }) => {
+    console.log('hello');
+    if (target instanceof SVGElement) {
+        target = target.parentElement;
+    }
+
+    if (target.classList.contains('pointer')) {
+        pointer.querySelector('.hover-animation').classList.add('hover');
+
+        if (target.classList.contains('hover-move')) {
+            pointer.querySelector('.hover-move').classList.add('move');
+        }
+    } else {
+        pointer.querySelector('.hover-animation').classList.remove('hover');
+        pointer.querySelector('.hover-move').classList.remove('move');
+    }
+
+
+});
+
+export function moveDrugIcon(clientX, clientY, width) {
+
+    requestAnimationFrame(() => {
+        pointer.style.top = `${clientY - width / 2}px`;
+        pointer.style.left = `${clientX - width / 2}px`
+    });
+}

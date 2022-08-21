@@ -30,9 +30,6 @@ function init(resources) {
 
     //const timelines = drawActivePaths(topBorder, bottomBorder);
 
-
-
-    addWheelHandler(resources);
     addNavItemClickHandler();
 
 
@@ -47,7 +44,8 @@ function init(resources) {
                 changeSection(index, resources);
                 //animateActiveItem();
 
-            })
+            }),
+                true
         });
     }
 
@@ -102,37 +100,7 @@ function init(resources) {
             .set(transitionItem, { onComplete: onAnimationEnd, delay: -2.8 });
     }
 
-    /**
-     * 
-     * @param {{[string]: any}} resources 
-     */
-    function addWheelHandler(resources) {
-        document.addEventListener('wheel', ev => onWheelEvent(ev, resources));
-    }
 
-    /**
-     * 
-     * @param {WheelEvent} ev 
-     * @param {{[string]: any}} resources 
-     */
-    function onWheelEvent(ev, resources) {
-
-        if (ev.deltaY > 0 && currentSectionIndex < 3 && shouldScroll) {
-            currentSectionIndex = iteratePage(currentSectionIndex, SCROLL_DIRECTION.DOWN);
-        } else if (ev.deltaY < 0 && currentSectionIndex > 0 && shouldScroll) {
-            currentSectionIndex = iteratePage(currentSectionIndex, SCROLL_DIRECTION.TOP);
-        }
-
-        currentActiveItem = navItems[currentSectionIndex];
-
-        if (prevSectionIndex !== currentSectionIndex) {
-            changeSection(currentSectionIndex, resources);
-            changeActiveElement(currentActiveItem, svg_container);
-            animateActiveItem();
-            prevSectionIndex = currentSectionIndex;
-        }
-
-    }
 
     /**
      * 

@@ -1,4 +1,5 @@
 import * as D3 from "d3";
+import { moveDrugIcon } from "..";
 import { PAGES, PAGESStr } from "./constants";
 import { about_section, experience__section, projects__section, sections, skills_section } from "./selection";
 
@@ -150,6 +151,9 @@ export function calculateMiddleValue(val, maxVal) {
 
 
 export function initiateDrugEvents(simulation) {
+    const pointer = document.querySelector('#mouse_pointer');
+
+    const { width } = pointer.getBoundingClientRect();
 
     function dragstarted(event) {
         if (!event.active) {
@@ -161,6 +165,7 @@ export function initiateDrugEvents(simulation) {
     }
 
     function dragged(event) {
+        moveDrugIcon(event.sourceEvent.clientX, event.sourceEvent.clientY, width);
         event.subject.fx = event.x;
         event.subject.fy = event.y;
     }

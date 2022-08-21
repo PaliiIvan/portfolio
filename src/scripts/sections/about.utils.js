@@ -39,7 +39,7 @@ export function showAnimationText(resources) {
     const additionalTextContact = document.querySelector('.description_text.contact_me');
 
 
-    additionalTextContact.innerHTML = `${resources[Resources.linkedIn]} ${resources[Resources.mail_icon]}`;
+    additionalTextContact.innerHTML = `${resources[Resources.linkedIn]} <a href="mailto:palii.ivan.v@gmail.com">${resources[Resources.mail_icon]}</a>`;
 
     gsap.fromTo(additionalText, {
         x: 1000,
@@ -80,9 +80,13 @@ export function showAnimationText(resources) {
         });
 
 
+    const l = document.querySelector('#linked_in');
 
+    l.addEventListener('click', () => {
+        window.location.href = ('https://www.linkedin.com/in/ivan-palii-780629174/');
+    })
 
-
+    const m = document.querySelector('#mail');
 
 
 

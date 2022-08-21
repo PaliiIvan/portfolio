@@ -9,19 +9,19 @@ import gsap from "gsap";
 
 export const SkillsDataOptions = {
     TOP: {
-        class: "skill_lvl_1",
+        class: "skill_lvl_1 pointer hover-move",
         width: 15,
         height: 15,
         r: 7.5
     },
     MIDDLE: {
-        class: "skill_lvl_2",
+        class: "skill_lvl_2 pointer hover-move",
         width: 6.875,
         height: 6.875,
         r: 3.4375
     },
     LOW: {
-        class: "skill_lvl_3",
+        class: "skill_lvl_3 pointer hover-move",
         width: 4.625,
         height: 4.625,
         r: 1.875
@@ -164,6 +164,10 @@ export function init(resources) {
                 deselectSkill(nodes, simulation)
                 isBuilded = false;
                 nodes.call(initiateDrugEvents.activeDrag);
+
+                nodes.nodes().forEach(x => {
+                    x.classList.add('hover-move');
+                });
             };
 
             let onBuildingEnd = () => {

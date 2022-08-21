@@ -6,7 +6,7 @@ import { SkillsDataOptions } from "./skills";
 
 /**
  *
- * @param {*} nodes
+ * @param {D3.Selection} nodes
  * @param {*} height
  * @returns {D3.Transition<HTMLElement, any, null, undefined>}
  */
@@ -14,6 +14,11 @@ export function animateBuildingBlocks(nodes, height, onEndCallback) {
   const nodesBig = nodes.filter((data) => data.width === SkillsDataOptions.TOP.width);
   const nodesMid = nodes.filter((data) => data.width == SkillsDataOptions.MIDDLE.width);
   const buildingTransition = D3.transition("tr").duration(1000);
+
+  console.log(nodes.nodes());
+  nodes.nodes().forEach(x => {
+    x.classList.remove('hover-move');
+  });
 
   const maxInColBig = 3;
   const maxInColSmall = 6;
@@ -140,6 +145,7 @@ export async function createCrossIcon(node, onClick) {
 
   const divForCross = document.createElement('div');
   divForCross.classList.add('cross-icon');
+  divForCross.classList.add('pointer');
   const svg = createSvg('svg').attr('width', '1em').attr('height', '1em').elem;
 
   const g = createSvg('g').elem;
